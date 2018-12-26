@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="537.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductController">
+   <children>
+      <ToolBar layoutY="2.0" prefHeight="42.0" prefWidth="940.0">
+         <items>
+            <Pane prefHeight="30.0" prefWidth="908.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="30.0" layoutX="-1.0" layoutY="-3.0">
+                     <image>
+                        <Image url="@picture/bike.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="loginBtn" layoutX="751.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="26.0" prefWidth="85.0" text="Login" />
+                  <Button fx:id="registerBtn" layoutX="838.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleRegisterBtn" prefHeight="26.0" prefWidth="85.0" text="Register" />
+               </children>
+            </Pane>
+         </items>
+      </ToolBar>
+      <Label fx:id="productNameLabel" layoutX="119.0" layoutY="81.0" prefHeight="42.0" prefWidth="294.0" text="Product Name">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="370.0" layoutY="162.0" prefHeight="55.0" prefWidth="194.0" text="จำนวนสินค้า:">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="373.0" layoutY="120.0" prefHeight="55.0" prefWidth="85.0" text="ราคา:">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="priceLabel" layoutX="459.0" layoutY="120.0" prefHeight="55.0" prefWidth="128.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="quantityChoice" layoutX="544.0" layoutY="177.0" prefHeight="34.0" prefWidth="159.0" />
+      <Button layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onAction="#onActionBackBtn" prefHeight="34.0" prefWidth="61.0" text="Back" />
+      <Button fx:id="addToCartBtn" layoutX="596.0" layoutY="252.0" mnemonicParsing="false" onAction="#onActionAddToCartBtn" prefHeight="55.0" prefWidth="106.0" text="เลือกสินค้า" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="515.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CartController">
+   <children>
+      <Label layoutX="37.0" layoutY="32.0" prefHeight="50.0" prefWidth="78.0" text="Cart">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="46.0" layoutY="98.0" prefHeight="322.0" prefWidth="487.0">
+         <columns>
+            <TableColumn fx:id="nameCol" prefWidth="348.80001068115234" text="Product Name" />
+            <TableColumn fx:id="quantityCol" prefWidth="136.8000061035156" text="Quantity" />
+         </columns>
+      </TableView>
+      <Button fx:id="backBtn" layoutX="7.0" layoutY="474.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="32.0" prefWidth="60.0" text="Back" />
+      <Button fx:id="deleteBtn" layoutX="264.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleDeleteBtn" text="Delete" />
+      <Button fx:id="buyBtn" layoutX="678.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleBuyBtn" prefHeight="42.0" prefWidth="78.0" text="ซื้อสินค้า" />
+      <Label layoutX="541.0" layoutY="139.0" prefHeight="32.0" prefWidth="78.0" text="address:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="addressChoiceBox" layoutX="613.0" layoutY="142.0" prefWidth="150.0" />
+      <Label fx:id="newAddressLabel" layoutX="541.0" layoutY="217.0" prefHeight="32.0" prefWidth="94.0" text="New address:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="newAddressTextArea" layoutX="541.0" layoutY="253.0" prefHeight="62.0" prefWidth="208.0" />
+      <Label fx:id="oldAddressLabel" layoutX="543.0" layoutY="221.0" prefHeight="76.0" prefWidth="202.0" />
+   </children>
+</AnchorPane>

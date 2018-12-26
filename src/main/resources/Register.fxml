@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegisterController">
+   <children>
+      <Pane layoutX="2.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="779.0">
+         <children>
+            <Line endY="106.0" startX="779.0" startY="106.0" />
+            <Line endX="779.0" endY="549.0" layoutY="52.0" startY="549.0" />
+            <Text layoutX="35.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uesrname:">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="35.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="89.0" layoutY="8.0">
+               <image>
+                  <Image url="@picture/bike.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="573.0" layoutY="22.0">
+               <image>
+                  <Image url="@picture/buy.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="registerBtn" layoutX="599.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleRegisterButtonAction" onMouseClicked="#handleRegisterButtonAction" prefHeight="56.0" prefWidth="142.0" text="Register" textAlignment="CENTER">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fefeff" height="68.0" layoutX="291.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
+            <Text layoutX="319.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Logo" wrappingWidth="114.0000019222498">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="re-password:">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="firstName:">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="35.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="lastname:" wrappingWidth="130.4160100221634">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Button fx:id="backBtn" layoutX="29.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleBackPageLoginButtonAction" prefHeight="56.0" prefWidth="142.0" text="Back" textAlignment="CENTER">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
+            <TextField fx:id="userFill" layoutX="212.0" layoutY="123.0" prefHeight="45.0" prefWidth="264.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="passwordFill" layoutX="212.0" layoutY="181.0" prefHeight="45.0" prefWidth="264.0" />
+            <PasswordField fx:id="repasswordFill" layoutX="212.0" layoutY="242.0" prefHeight="45.0" prefWidth="264.0" />
+            <TextField fx:id="firstnameFill" layoutX="212.0" layoutY="308.0" prefHeight="45.0" prefWidth="264.0">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <TextField fx:id="lastnameFill" layoutX="212.0" layoutY="362.0" prefHeight="45.0" prefWidth="264.0">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <Label fx:id="label" layoutX="599.0" layoutY="297.0" prefHeight="45.0" prefWidth="159.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Text layoutX="35.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="address:" wrappingWidth="130.4160100221634">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <TextField fx:id="addressFill" layoutX="212.0" layoutY="414.0" prefHeight="45.0" prefWidth="514.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Label layoutX="33.0" layoutY="470.0" prefHeight="37.0" prefWidth="159.0" text="Telephone No:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tel_numberFill" layoutX="212.0" layoutY="466.0" prefHeight="45.0" prefWidth="264.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

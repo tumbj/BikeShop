@@ -8,21 +8,21 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class OrderDB {
-    private static String user = "root";
-    private static String pass = "";
-    private static String dbURL = "jdbc:mysql://localhost/bikeshop";
+    private static String dbURL = "jdbc:sqlite:Database.db";
+    private static String dbName = "org.sqlite.JDBC";
 
     public  ArrayList<Order> getAllOrder() {
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(dbURL, user, pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "select * from OrderList";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
-                    String id = resultSet.getString("Tel");
-                    String name = resultSet.getString("OrderID");
+                    String id = resultSet.getString("tel_number");
+                    String name = resultSet.getString("Order_ID");
                     boolean a = resultSet.getBoolean("Status");
                     orders.add(new Order(id, name, a));
                 }
@@ -30,57 +30,66 @@ public class OrderDB {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return orders;
     }
         public  ArrayList<OrderDetail>getOrderList(String orderID){
         ArrayList<OrderDetail>orders=new ArrayList<>();
         try{
-            Connection connection = DriverManager.getConnection(dbURL,user,pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
             if(connection != null){
-                String query = "select * from OrderDetail WHERE OrderDetail.OrderID='"+orderID+"'";
+                String query = "select * from OrderDetail WHERE OrderDetail.Order_ID='"+orderID+"'";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
-                    String Pid =resultSet.getString("ProductID");
-                    String Oid=resultSet.getString("OrderID");
+                    String Pid =resultSet.getString("Product_ID");
+                    String Oid=resultSet.getString("Order_ID");
                     double p=resultSet.getDouble("Price");
                     int a=resultSet.getInt("Amount");
-                    String tel=resultSet.getString("Tel");
+                    String tel=resultSet.getString("Tel_number");
                     orders.add(new OrderDetail(Pid,Oid,p,a,tel));
                 }
                 connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        for (OrderDetail order : orders) {
+            for (OrderDetail order : orders) {
             System.out.println(order);
         }
 
         return orders;
     }
     public String getOrderByTel(String tel){
-        String tel_no ="";
+        String order_id ="";
         try {
-            Connection connection = DriverManager.getConnection(dbURL, user, pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
 
             if (connection != null) {
                 String query = "select * from OrderList WHERE OrderList.tel_number='" + tel + "'";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                tel_no= resultSet.getString("Tel_number");
+                order_id = resultSet.getString("Order_ID");
 
                 connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        return tel_no;
+        return order_id;
     }
-    public  void updateOrder (String oid){
+    public  void updateOrder (String oid){ //แก้เป็นเบอร์โทร
         try {
-            Connection connection = DriverManager.getConnection(dbURL,user,pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
 
             if(connection != null){
                 String query  = " UPDATE OrderList SET Status= '"+1+"' WHERE = '"+oid+"'";
@@ -90,12 +99,15 @@ public class OrderDB {
             }
         }  catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
     public void createOrder(String date,String cus_tel){
         try {
-            Connection connection = DriverManager.getConnection(dbURL,user,pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
             if (connection != null) {
                 String query = "insert into OrderList (Date,status,total,tel_number) values " +
                         "('" + date+ "','" +"false" + "','" +"100','"+ cus_tel  + "')";
@@ -104,6 +116,8 @@ public class OrderDB {
                 connection.close();
             }
         }  catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

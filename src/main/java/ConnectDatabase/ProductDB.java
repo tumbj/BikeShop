@@ -8,16 +8,14 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ProductDB {
-    private static String user = "root";
-    private static String pass = "";
-    private static String dbURL = "jdbc:mysql://localhost/bikeshop";
-
-//    private static String dbName = "org.sqlite.JDBC";
+    private static String dbURL = "jdbc:sqlite:Database.db";
+    private static String dbName = "org.sqlite.JDBC";
 
     public static ArrayList<Product> getAllProduct(){
         ArrayList<Product>products=new ArrayList<>();
         try{
-            Connection connection = DriverManager.getConnection(dbURL,user,pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
             if(connection != null){
                 String query = "select * from Product";
                 Statement statement = connection.createStatement();
@@ -31,7 +29,7 @@ public class ProductDB {
                 }
                 connection.close();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return products;
@@ -39,7 +37,8 @@ public class ProductDB {
 
     public static Product getProduct(int id){
         try{
-            Connection connection = DriverManager.getConnection(dbURL,user,pass);
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
             if(connection != null){
                 String query = "select * from Product WHERE Product.id ='"+id+"'";
                 Statement statement = connection.createStatement();
@@ -55,7 +54,9 @@ public class ProductDB {
 
         }  catch (SQLException e) {
             e.printStackTrace();
-         }
+         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

@@ -56,6 +56,8 @@ public class ShowProductController {
     private Button cartBtn;
 
     @FXML
+    private Button managementBtn;
+    @FXML
     private Label numOrderLabel;
 
 
@@ -68,6 +70,14 @@ public class ShowProductController {
         nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
 
+
+        if(checkRole()){
+            managementBtn.setDisable(false);
+            managementBtn.setOpacity(1);
+        }else{
+            managementBtn.setDisable(true);
+            managementBtn.setOpacity(0);
+        }
         setAllData();
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         quantityCol.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
@@ -84,6 +94,32 @@ public class ShowProductController {
     }
 
 
+    public boolean checkRole(){
+        if(customerToken!=null){
+            if(customerToken.getUsername().equals("admin")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @FXML
+    void onActionManagementBtn(ActionEvent event){
+        Button b = (Button) event.getSource();
+
+        Stage stage = (Stage) b.getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProductList.fxml"));
+        try {
+            stage.setScene(new Scene((Parent) loader.load(), 1280,720));
+
+            stage.show();
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+    }
     @FXML
     void handleLoginBtn(ActionEvent event) {
         Button b = (Button) event.getSource();

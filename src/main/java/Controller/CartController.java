@@ -120,22 +120,25 @@ public class CartController {
                 }
                 else {
                     textHaveSign = true;
+                    break;
                 }
             }
             if(textHaveSign){
                 Alert alert = new Alert(Alert.AlertType.ERROR,
                         "new address can not have any sign(example: !,@,#,$,%,^,&,*,-,+)",ButtonType.OK);
                 alert.showAndWait();
+            }else{
+                customerToken.setAddress(newAddressTextArea.getText());
+                System.out.println("new address "+customerToken.getAddress());
             }
         }
-//        orderDB.createOrder("22/12/61",customerToken.getTel_number());
         orderDB.createOrder("22/12/61",customerToken.getTel_number());
 
         for (Product product:carts) {
             orderDetail.createOrderDetail(product,orderDB.getOrderByTel(customerToken.getTel_number()),customerToken.getTel_number());
 
         }
-//        orderDB.getOrderByTel(customerToken.getTel_number());
+
 
 
     }

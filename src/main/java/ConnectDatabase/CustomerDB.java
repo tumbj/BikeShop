@@ -1,43 +1,36 @@
 package ConnectDatabase;
 
 import Model.Customer;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class CustomerDB {
-    private static String user = "root";
-    private static String pass = "";
-    private static String dbURL = "jdbc:mysql://localhost/bikeshop";
+    private static String dbURL = "jdbc:sqlite:Database.db";
+    private static String dbName = "org.sqlite.JDBC";
 
 
     public static Customer customerToken;
 
     public static void login(String username, String password){
         try{
-            Connection conn = DriverManager.getConnection(dbURL,user,pass);
-
+            Class.forName(dbName);
+            Connection conn = DriverManager.getConnection(dbURL);
 
             Statement myStmt = conn.createStatement();
 
-            ResultSet myRs  = myStmt.executeQuery("select * from users where username" +
+            ResultSet myRs  = myStmt.executeQuery("select * from Customer where username" +
                     " = '"  + username + "' and password = '" + password+ "'" );
 
             if(myRs.next()){
                 String username1 =myRs.getString("username");
                 String pass= myRs.getString("password");
-                String firstname = myRs.getString("firstname");
-                String lastname = myRs.getString("lastname");
+                String firstname = myRs.getString("first_name");
+                String lastname = myRs.getString("last_name");
                 String address = myRs.getString("address");
                 String tel_number = myRs.getString("tel_number");
 
                 customerToken = new Customer(username1,pass,address,firstname,lastname,tel_number);
-                conn.close();;
+                conn.close();
             }
 
         }
@@ -49,18 +42,20 @@ public class CustomerDB {
     public static void register(String userID,String passID,String repassID,String firstname,String lastname,
                                 String address,String tel_number){
         try{
-            Connection conn = DriverManager.getConnection(dbURL,user,pass);
+            Class.forName(dbName);
+            Connection conn = DriverManager .getConnection(dbURL);
             if(passID.equals(repassID)){
-                String query = " insert into users (username,password,firstname,lastname,address,tel_number)"
+                String query = " insert into customer (tel_number,username,password,first_name,last_name,address)"
                         + " values (?, ?, ?, ?,?, ?)";
 
                 PreparedStatement preparedStmt = conn.prepareStatement(query);
-                preparedStmt.setString (1, userID);
-                preparedStmt.setString (2, passID);
-                preparedStmt.setString (3, firstname);
-                preparedStmt.setString (4, lastname);
-                preparedStmt.setString (5, address);
-                preparedStmt.setString (6, tel_number);
+                preparedStmt.setString (1, tel_number);
+                preparedStmt.setString (2, userID);
+                preparedStmt.setString (3, passID);
+                preparedStmt.setString (4, firstname);
+                preparedStmt.setString (5, lastname);
+                preparedStmt.setString (6, address);
+
 
                 preparedStmt.execute();
                 login(userID,passID);

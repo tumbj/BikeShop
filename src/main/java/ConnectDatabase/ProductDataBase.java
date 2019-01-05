@@ -21,7 +21,7 @@ public class ProductDataBase {
                 while (resultSet.next()){
                     String id =resultSet.getString("ID");
                     String name=resultSet.getString("Name");
-                    int a = resultSet.getInt("Amount");
+                    int a = resultSet.getInt("quantity");
                     double p = resultSet.getDouble("Price");
                     products.add(new Product(id,name,p,a));
                 }
@@ -40,7 +40,7 @@ public class ProductDataBase {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if(connection != null){
-                String query = "insert into Product (ID,Name,Amount,Price) values " +
+                String query = "insert into Product (ID,Name,quantity,Price) values " +
                         "('"+product.getId()+"','"+product.getName()+"',"+product.getQuantity()+","+product.getPrice()+")";
                 Statement p = connection.createStatement();
                 p.executeUpdate(query);
@@ -73,7 +73,7 @@ public class ProductDataBase {
             Class.forName(dbName);
             Connection connection = DriverManager .getConnection(dbURL);
             if(connection != null){
-                String query  = " UPDATE Product SET Name= '"+product.getName()+"',Amount = "+product.getQuantity()
+                String query  = " UPDATE Product SET Name= '"+product.getName()+"',quantity = "+product.getQuantity()
                         +",Price = "+product.getPrice()+" WHERE ID = "+product.getId()+";";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
@@ -97,7 +97,7 @@ public class ProductDataBase {
                 ResultSet resultSet = statement.executeQuery(query);
                 String id =resultSet.getString("ID");
                 String name=resultSet.getString("Name");
-                int a = resultSet.getInt("Amount");
+                int a = resultSet.getInt("quantity");
                 double p = resultSet.getDouble("Price");
                 product=new Product(id,name,p,a);
                 connection.close();

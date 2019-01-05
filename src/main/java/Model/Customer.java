@@ -40,4 +40,8 @@ public class Customer {
     public String getTel_number() {
         return tel_number;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

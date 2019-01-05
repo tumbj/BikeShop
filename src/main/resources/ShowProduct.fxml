@@ -47,5 +47,6 @@
       <Button fx:id="goBtn" layoutX="833.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionGoBtn" prefHeight="34.0" prefWidth="62.0" text="Go" />
       <Button fx:id="cartBtn" layoutX="702.0" layoutY="72.0" mnemonicParsing="false" onAction="#onActionCartBtn" prefHeight="34.0" prefWidth="71.0" text="Cart" />
       <Label fx:id="numOrderLabel" layoutX="766.0" layoutY="46.0" prefHeight="26.0" prefWidth="41.0" />
+      <Button fx:id="managementBtn" layoutX="797.0" layoutY="72.0" mnemonicParsing="false" onAction="#onActionManagementBtn" prefHeight="34.0" prefWidth="94.0" text="Management" />
    </children>
 </AnchorPane>

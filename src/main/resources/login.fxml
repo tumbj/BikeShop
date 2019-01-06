@@ -47,7 +47,7 @@
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fefeff" height="68.0" layoutX="213.0" layoutY="21.0" stroke="BLACK" strokeType="INSIDE" width="170.0" />
-      <Text layoutX="256.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGO" wrappingWidth="114.0000019222498">
+      <Text layoutX="229.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    BFF" wrappingWidth="138.0000019222498">
          <font>
             <Font size="34.0" />
          </font>
@@ -67,5 +67,6 @@
          </font>
       </TextField>
       <PasswordField fx:id="pwdInput" layoutX="239.0" layoutY="295.0" prefHeight="45.0" prefWidth="200.0" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="441.0" mnemonicParsing="false" onAction="#onActionBackBtn" text="Back" />
    </children>
 </Pane>

@@ -22,6 +22,8 @@ import static Controller.ShowProductController.PRODUCT_ID;
 public class ProductController {
     @FXML
     private Button loginBtn;
+    @FXML
+    private Button logoutBtn;
 
     @FXML
     private Button registerBtn;
@@ -43,9 +45,9 @@ public class ProductController {
     public static Cart cart = Cart.getInstance();
     @FXML
     void initialize(){
-         int id = PRODUCT_ID;
-        if(ProductDB.getProduct(id)!=null) {
-            product = (ProductDB.getProduct(id));
+
+        if(ProductDB.getProduct(PRODUCT_ID)!=null) {
+            product = (ProductDB.getProduct(PRODUCT_ID));
             productNameLabel.setText(product.getName());
             for (int i = 1; i <= product.getQuantity(); i++) {
                 quantityChoice.getItems().add(i);
@@ -53,6 +55,21 @@ public class ProductController {
                     quantityChoice.setValue(i);
                 }
             }
+        }
+        if(customerToken !=null){
+            //enable logoutBtn
+            logoutBtn.setDisable(false);
+            logoutBtn.setOpacity(1);
+            //disable loginBtn
+            loginBtn.setDisable(true);
+            loginBtn.setOpacity(0);
+        }else{
+            //enable loginBtn
+            loginBtn.setDisable(false);
+            loginBtn.setOpacity(1);
+            //disable logoutBtn
+            logoutBtn.setDisable(true);
+            logoutBtn.setOpacity(0);
         }
 
     }
@@ -88,10 +105,7 @@ public class ProductController {
                 loginBtn.setOpacity(0);
                 loginBtn.setDisable(true);
             }
-//            System.out.println(isLogin);
-//            if (isLogin) {
-//                loginStage.close();
-//            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,6 +114,17 @@ public class ProductController {
 
     @FXML
     void handleRegisterBtn(ActionEvent event) {
+        Button b = (Button) event.getSource();
+        Stage stage = (Stage) b.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Register.fxml"));
+
+        try {
+            stage.setScene(new Scene((Parent) loader.load(), 760, 654));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -140,4 +165,13 @@ public class ProductController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void onActionHandleLogoutBtn(ActionEvent event) {
+            customerToken = null;
+            initialize();
+
+    }
+
+
 }

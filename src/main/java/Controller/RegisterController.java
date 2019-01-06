@@ -46,26 +46,24 @@ public class RegisterController {
 
     @FXML
     Label label;
-    @FXML
-    protected void handleBackPageLoginButtonAction(ActionEvent e) {
 
-        Button b = (Button) e.getSource();
+        @FXML
+        void onActionBackBtn(ActionEvent event){
+            Button b = (Button) event.getSource();
+            Stage stage = (Stage) b.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
 
-        Stage stage = (Stage) b.getScene().getWindow();
+            try {
+                stage.setScene(new Scene((Parent) loader.load(), 929, 592));
+                stage.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-        try {
-            stage.setScene(new Scene((Parent) loader.load(), 799, 654));
 
-            stage.show();
 
-        } catch (IOException e1) {
-            e1.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-
-
-    }
     @FXML
     protected void handleRegisterButtonAction(ActionEvent e)  {
         String userID = userFill.getText();

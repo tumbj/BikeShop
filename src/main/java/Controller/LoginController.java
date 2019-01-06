@@ -40,20 +40,18 @@ public class LoginController {
 
 
     @FXML
-    protected void handleNextPageRegisterButtonAction(ActionEvent e) {
+    protected void handleNextPageRegisterButtonAction(ActionEvent event) {
 
-        Button b = (Button) e.getSource();
-
+        Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Register.fxml"));
-        try {
-            stage.setScene(new Scene((Parent) loader.load(), 799, 654));
 
+        try {
+            stage.setScene(new Scene((Parent) loader.load(), 760, 654));
             stage.show();
 
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
@@ -71,6 +69,23 @@ public class LoginController {
 
     }
 
+    @FXML
+    void onActionBackBtn(ActionEvent event){
+        Button b = (Button) event.getSource();
+        Stage stage = (Stage) b.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
+
+        try {
+            stage.setScene(new Scene((Parent) loader.load(), 929, 592));
+            stage.show();
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void navigateTo(String name,MouseEvent event,int width,int height){
         Button b = (Button) event.getSource();
         Stage stage = (Stage) b.getScene().getWindow();
@@ -84,4 +99,5 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
 }

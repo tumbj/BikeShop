@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="537.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductController">
    <children>
       <ToolBar layoutY="2.0" prefHeight="42.0" prefWidth="940.0">
@@ -22,8 +21,9 @@
                         <Image url="@picture/bike.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="loginBtn" layoutX="751.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="26.0" prefWidth="85.0" text="Login" />
-                  <Button fx:id="registerBtn" layoutX="838.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleRegisterBtn" prefHeight="26.0" prefWidth="85.0" text="Register" />
+                  <Button fx:id="registerBtn" layoutX="743.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleRegisterBtn" prefHeight="26.0" prefWidth="85.0" text="Register" />
+                  <Button fx:id="logoutBtn" layoutX="837.0" layoutY="6.0" mnemonicParsing="false" onAction="#onActionHandleLogoutBtn" prefHeight="26.0" prefWidth="85.0" text="Logout" />
+                  <Button fx:id="loginBtn" layoutX="837.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="26.0" prefWidth="85.0" text="Login" />
                </children>
             </Pane>
          </items>

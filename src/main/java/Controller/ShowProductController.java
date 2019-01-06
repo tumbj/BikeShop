@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static ConnectDatabase.CustomerDB.customerToken;
 
@@ -60,11 +62,15 @@ public class ShowProductController {
     @FXML
     private Label numOrderLabel;
 
+    @FXML
+    private Button logoutBtn;
 
-    public static int PRODUCT_ID=0;
+
+    public static String PRODUCT_ID="";
 
     ObservableList<Product> products = FXCollections.observableArrayList();
 
+    ArrayList<Product> allProducts = new ArrayList<>();
     @FXML
     public void initialize() {
         nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
@@ -78,6 +84,26 @@ public class ShowProductController {
             managementBtn.setDisable(true);
             managementBtn.setOpacity(0);
         }
+
+        if(customerToken !=null){
+            cartBtn.setDisable(false);
+            cartBtn.setOpacity(1);
+            //enable logoutBtn
+            logoutBtn.setDisable(false);
+            logoutBtn.setOpacity(1);
+            //disable loginBtn
+            loginBtn.setDisable(true);
+            loginBtn.setOpacity(0);
+        }else{
+            cartBtn.setDisable(true);
+            cartBtn.setOpacity(0);
+            //enable loginBtn
+            loginBtn.setDisable(false);
+            loginBtn.setOpacity(1);
+            //disable logoutBtn
+            logoutBtn.setDisable(true);
+            logoutBtn.setOpacity(0);
+        }
         setAllData();
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         quantityCol.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
@@ -90,7 +116,9 @@ public class ShowProductController {
     }
 
     void setAllData() {
-        products.addAll(ProductDB.getAllProduct());
+        allProducts.clear();
+        allProducts.addAll(ProductDB.getAllProduct());
+        products.setAll(allProducts);
     }
 
 
@@ -134,10 +162,6 @@ public class ShowProductController {
                 loginBtn.setOpacity(0);
                 loginBtn.setDisable(true);
             }
-//            System.out.println(isLogin);
-//            if (isLogin) {
-//                loginStage.close();
-//            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -151,13 +175,8 @@ public class ShowProductController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Register.fxml"));
 
         try {
-            stage.setScene(new Scene((Parent) loader.load(), 596, 480));
+            stage.setScene(new Scene((Parent) loader.load(), 760, 654));
             stage.show();
-
-//            System.out.println(isLogin);
-//            if (isLogin) {
-//                loginStage.close();
-//            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -173,9 +192,9 @@ public class ShowProductController {
 
         try {
             if(tableView.getSelectionModel().getSelectedItem().getId()!=null) {
-                int tmp = Integer.parseInt(tableView.getSelectionModel().getSelectedItem().getId());
 
-                    PRODUCT_ID = tmp;
+
+                    PRODUCT_ID = tableView.getSelectionModel().getSelectedItem().getId();
 
                     stage.setScene(new Scene((Parent) loader.load(), 927, 527));
                     stage.show();
@@ -185,26 +204,66 @@ public class ShowProductController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(tableView.getSelectionModel().getSelectedItem().getId());
+//        System.out.println(tableView.getSelectionModel().getSelectedItem().getId());
+
     }
+    @FXML
+    void onActionHandleLogoutBtn(ActionEvent event) {
+
+        customerToken = null;
+        initialize();
+    }
+
 
     @FXML
     void onActionCartBtn(ActionEvent event) {
-        Button b = (Button) event.getSource();
-        Stage stage = (Stage) b.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cart.fxml"));
+            Button b = (Button) event.getSource();
+            Stage stage = (Stage) b.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cart.fxml"));
 
-        try {
-            stage.setScene(new Scene((Parent) loader.load(), 771, 515));
-            stage.show();
+            try {
+                stage.setScene(new Scene((Parent) loader.load(), 771, 515));
+                stage.show();
 
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
+    @FXML
+    void onActionBikeCategoryBtn(ActionEvent event) {
+        products.clear();
+        for (Product product:allProducts) {
+            if(product.getId().substring(0,1).equals("0")){
+               products.add(product);
+            }
+        }
+    }
+
+    @FXML
+    void onActionBikeAccessCategoryBtn(ActionEvent event) {
+        products.clear();
+        for (Product product:allProducts) {
+            if(product.getId().substring(0,1).equals("1")){
+                products.add(product);
+            }
+        }
+    }
+
+    @FXML
+    void onActionAccessCategoryBtn(ActionEvent event) {
+        products.clear();
+        for (Product product:allProducts) {
+            if(product.getId().substring(0,1).equals("2")){
+                products.add(product);
+            }
+        }
+    }
+
+    public void onActionHandleSearchBtn(ActionEvent event) {
+    }
 }
 

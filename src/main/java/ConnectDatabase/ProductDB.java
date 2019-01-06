@@ -35,21 +35,22 @@ public class ProductDB {
         return products;
     }
 
-    public static Product getProduct(int id){
+    public static Product getProduct(String id){
         try{
             Class.forName(dbName);
             Connection connection = DriverManager .getConnection(dbURL);
+            String tmpID = "";
             if(connection != null){
                 String query = "select * from Product WHERE Product.id ='"+id+"'";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 resultSet.next();
-                int id01 =resultSet.getInt("id");
+                String id01 =resultSet.getString("id");
                 String name= resultSet.getString("name");
                 double price = resultSet.getDouble("price");
                 int quantity = resultSet.getInt("quantity");
                 connection.close();
-                return new Product(id01+"",name,price,quantity);
+                return new Product(id01,name,price,quantity);
             }
 
         }  catch (SQLException e) {

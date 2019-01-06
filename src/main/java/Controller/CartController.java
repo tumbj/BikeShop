@@ -145,6 +145,7 @@ public class CartController {
 
     @FXML
     void handleDeleteBtn(ActionEvent event) {
+        carts.remove(tableView.getSelectionModel().getSelectedItem());
 
     }
 

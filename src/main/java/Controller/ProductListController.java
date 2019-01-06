@@ -13,11 +13,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import Model.Product;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,6 +37,9 @@ public class ProductListController {
     private Button addBtn,deletBtn,OrderBtn;
     @FXML
     private Label eID,eName,eAmount,ePrice;
+    @FXML private ImageView  upload;
+    private File file;
+    private String srcImage="";
     @FXML
     public void initialize(){
         ID.setCellValueFactory(new PropertyValueFactory<Product,String>("id"));
@@ -87,16 +94,16 @@ public class ProductListController {
             String name=textName.getText();
             int amonut=Integer.parseInt(textAmount.getText());
             double price=Double.parseDouble(textPrice.getText());
-            Product product=new Product(id,name,price,amonut);
+            Product product=new Product(id,name,price,amonut,srcImage);
             productDataBase.addProductToDB(product);
             textID.clear();
             textName.clear();
             textAmount.clear();
             textPrice.clear();
-            eID.setText("");
-            eAmount.setText("");
-            ePrice.setText("");
-            eName.setText("");
+//            eID.setText("");
+//            eAmount.setText("");
+//            ePrice.setText("");
+//            eName.setText("");
 
             showTable();
         }
@@ -162,5 +169,27 @@ public class ProductListController {
         }
         return false;
     }
+    @FXML
+    public void loadPicture(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose your picture");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Choose \".png\" and \".jpg\" file", "*.png", "*.jpg"));
+        file = fileChooser.showOpenDialog(upload.getScene().getWindow());
+        String[] tmp = file.getAbsolutePath().split("\\\\");
+        String path ="";
+        for (int i = 0; i < tmp.length-1; i++) {
+            path+=tmp[i]+"/";
+            System.out.println(tmp[i]);
+        }
+        path+=tmp[tmp.length-1];
+        System.out.println(path);
+        upload.setImage(new Image("file:///"+path));
+        System.out.println("file:///"+path);
+        srcImage="file:///"+path;
+
+
+    }
+
 
 }

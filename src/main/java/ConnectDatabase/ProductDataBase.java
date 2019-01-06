@@ -23,7 +23,8 @@ public class ProductDataBase {
                     String name=resultSet.getString("Name");
                     int a = resultSet.getInt("quantity");
                     double p = resultSet.getDouble("Price");
-                    products.add(new Product(id,name,p,a));
+                    String url = resultSet.getString("urlImage");
+                    products.add(new Product(id,name,p,a,url));
                 }
                 connection.close();
             }
@@ -40,8 +41,8 @@ public class ProductDataBase {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if(connection != null){
-                String query = "insert into Product (ID,Name,quantity,Price) values " +
-                        "('"+product.getId()+"','"+product.getName()+"',"+product.getQuantity()+","+product.getPrice()+")";
+                String query = "insert into Product (ID,Name,quantity,Price,urlImage) values " +
+                        "('"+product.getId()+"','"+product.getName()+"',"+product.getQuantity()+","+product.getPrice()+",'"+product.getUrlImage()+"')";
                 Statement p = connection.createStatement();
                 p.executeUpdate(query);
                 connection.close();
@@ -99,7 +100,8 @@ public class ProductDataBase {
                 String name=resultSet.getString("Name");
                 int a = resultSet.getInt("quantity");
                 double p = resultSet.getDouble("Price");
-                product=new Product(id,name,p,a);
+                String url = resultSet.getString("urlImage");
+                product=new Product(id,name,p,a,url);
                 connection.close();
             }
         } catch (ClassNotFoundException e) {

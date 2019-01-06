@@ -25,7 +25,8 @@ public class ProductDB {
                     String name=resultSet.getString("name");
                     double price = resultSet.getDouble("price");
                     int quantity = resultSet.getInt("quantity");
-                    products.add(new Product(id,name,price,quantity));
+                    String url = resultSet.getString("urlImage");
+                    products.add(new Product(id,name,price,quantity,url));
                 }
                 connection.close();
             }
@@ -48,8 +49,9 @@ public class ProductDB {
                 String name= resultSet.getString("name");
                 double price = resultSet.getDouble("price");
                 int quantity = resultSet.getInt("quantity");
+                String url = resultSet.getString("urlImage");
                 connection.close();
-                return new Product(id01,name,price,quantity);
+                return new Product(id01,name,price,quantity,url);
             }
 
         }  catch (SQLException e) {

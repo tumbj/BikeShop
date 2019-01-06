@@ -191,7 +191,7 @@ public class ShowProductController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/product.fxml"));
 
         try {
-            if(tableView.getSelectionModel().getSelectedItem().getId()!=null) {
+            if(tableView.getSelectionModel().getSelectedItem()!=null) {
 
 
                     PRODUCT_ID = tableView.getSelectionModel().getSelectedItem().getId();

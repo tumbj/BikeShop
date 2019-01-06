@@ -48,8 +48,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="quantityChoice" layoutX="544.0" layoutY="177.0" prefHeight="34.0" prefWidth="159.0" />
+      <ChoiceBox fx:id="quantityChoice" layoutX="544.0" layoutY="177.0" prefHeight="34.0" prefWidth="159.0" stylesheets="@styleChoicebox.css" />
       <Button layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onAction="#onActionBackBtn" prefHeight="34.0" prefWidth="61.0" text="Back" />
       <Button fx:id="addToCartBtn" layoutX="596.0" layoutY="252.0" mnemonicParsing="false" onAction="#onActionAddToCartBtn" prefHeight="55.0" prefWidth="106.0" text="เลือกสินค้า" />
+      <ImageView fx:id="showImage" fitHeight="210.0" fitWidth="243.0" layoutX="91.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

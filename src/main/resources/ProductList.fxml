@@ -41,5 +41,7 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fx:id="upload" fitHeight="223.0" fitWidth="234.0" layoutX="927.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="loadPictureBtn" layoutX="1079.0" layoutY="503.0" mnemonicParsing="false" onAction="#loadPicture" text="Load Picture" />
    </children>
 </AnchorPane>

@@ -62,7 +62,7 @@ public class ProductController {
                     quantityChoice.setValue(i);
                 }
             }
-//            showImage.setImage(new Image("/image/" + product.getUrlImage()));
+            showImage.setImage(new Image(product.getUrlImage()));
         }
         if(customerToken !=null){
             //enable logoutBtn
@@ -157,10 +157,10 @@ public class ProductController {
             }
         }
         else {
-//            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
-//                    , quantityChoice.getValue(),product.getUrlImage()));
             cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
-                    , quantityChoice.getValue()));
+                    , quantityChoice.getValue(),product.getUrlImage()));
+//            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
+//                    , quantityChoice.getValue()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION,
                     "Add to cart complete, please check in cart",ButtonType.OK);
             Optional<ButtonType> result = alert.showAndWait();

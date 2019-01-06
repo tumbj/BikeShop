@@ -37,8 +37,9 @@ public class LoginController {
     PasswordField pwdInput;
 
 
-
-
+public static String FROMPAGE ;
+    public static  int FROMWIDTH;
+    public static int FROMHEIGHT;
     @FXML
     protected void handleNextPageRegisterButtonAction(ActionEvent event) {
 
@@ -65,24 +66,23 @@ public class LoginController {
 
         CustomerDB.login(userID,passID);
         System.out.println(customerToken.getUsername());
-        navigateTo("/ShowProduct.fxml",e,929, 592);
+        System.out.println(FROMPAGE);
+        if(FROMPAGE==null) {
+            navigateTo("/ShowProduct.fxml", e, 929, 592);
+        }else {
+            navigateTo(FROMPAGE,e, FROMWIDTH, FROMHEIGHT);
+            FROMPAGE =null;
+        }
 
     }
 
     @FXML
-    void onActionBackBtn(ActionEvent event){
-        Button b = (Button) event.getSource();
-        Stage stage = (Stage) b.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
-
-        try {
-            stage.setScene(new Scene((Parent) loader.load(), 929, 592));
-            stage.show();
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    void onActionBackBtn(MouseEvent event){
+        if(FROMPAGE==null) {
+            navigateTo("/ShowProduct.fxml", event, 929, 592);
+        }else {
+            navigateTo(FROMPAGE,event, FROMWIDTH, FROMHEIGHT);
+            FROMPAGE =null;
         }
     }
 

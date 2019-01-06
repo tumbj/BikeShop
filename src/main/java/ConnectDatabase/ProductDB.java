@@ -39,7 +39,6 @@ public class ProductDB {
         try{
             Class.forName(dbName);
             Connection connection = DriverManager .getConnection(dbURL);
-            String tmpID = "";
             if(connection != null){
                 String query = "select * from Product WHERE Product.id ='"+id+"'";
                 Statement statement = connection.createStatement();

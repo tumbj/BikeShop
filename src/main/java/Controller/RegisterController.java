@@ -17,6 +17,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+import static Controller.LoginController.FROMHEIGHT;
+import static Controller.LoginController.FROMPAGE;
+import static Controller.LoginController.FROMWIDTH;
+
 public class RegisterController {
 
     @FXML
@@ -47,20 +51,13 @@ public class RegisterController {
     @FXML
     Label label;
 
-        @FXML
-        void onActionBackBtn(ActionEvent event){
-            Button b = (Button) event.getSource();
-            Stage stage = (Stage) b.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
-
-            try {
-                stage.setScene(new Scene((Parent) loader.load(), 929, 592));
-                stage.show();
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
+    @FXML
+    void onActionBackBtn(ActionEvent event){
+            if(FROMPAGE==null) {
+                navigateTo("/ShowProduct.fxml", event, 929, 592);
+            }else {
+                navigateTo(FROMPAGE,event, FROMWIDTH, FROMHEIGHT);
+                FROMPAGE =null;
             }
         }
 

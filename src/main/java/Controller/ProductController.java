@@ -3,14 +3,14 @@ package Controller;
 import ConnectDatabase.ProductDB;
 import Model.Cart;
 import Model.Product;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,8 +18,13 @@ import java.util.Optional;
 
 import static ConnectDatabase.CustomerDB.customerToken;
 import static Controller.ShowProductController.PRODUCT_ID;
+import static Controller.LoginController.FROMHEIGHT;
+import static Controller.LoginController.FROMPAGE;
+import static Controller.LoginController.FROMWIDTH;
+
 
 public class ProductController {
+
     @FXML
     private Button loginBtn;
     @FXML
@@ -39,6 +44,8 @@ public class ProductController {
 
     @FXML
     private Button addToCartBtn;
+    @FXML
+    private ImageView showImage;
 
     private Product product;
 
@@ -55,6 +62,7 @@ public class ProductController {
                     quantityChoice.setValue(i);
                 }
             }
+//            showImage.setImage(new Image("/image/" + product.getUrlImage()));
         }
         if(customerToken !=null){
             //enable logoutBtn
@@ -101,6 +109,10 @@ public class ProductController {
             stage.setScene(new Scene((Parent) loader.load(), 596, 480));
             stage.show();
 
+
+            FROMPAGE= ("/product.fxml");
+            FROMWIDTH=(927);
+            FROMHEIGHT=(527);
             if (customerToken != null) {
                 loginBtn.setOpacity(0);
                 loginBtn.setDisable(true);
@@ -122,6 +134,10 @@ public class ProductController {
             stage.setScene(new Scene((Parent) loader.load(), 760, 654));
             stage.show();
 
+
+            FROMPAGE= ("/product.fxml");
+            FROMWIDTH=(927);
+            FROMHEIGHT=(527);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -141,6 +157,8 @@ public class ProductController {
             }
         }
         else {
+//            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
+//                    , quantityChoice.getValue(),product.getUrlImage()));
             cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
                     , quantityChoice.getValue()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION,

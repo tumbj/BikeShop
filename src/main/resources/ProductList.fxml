@@ -5,29 +5,41 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="893.0" prefWidth="1207.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductListController">
+<AnchorPane prefHeight="1293.0" prefWidth="1207.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductListController">
    <children>
-      <TableView fx:id="tableView" layoutX="52.0" layoutY="108.0" prefHeight="633.0" prefWidth="845.0">
+      <TableView fx:id="tableView" layoutX="52.0" layoutY="108.0" prefHeight="607.0" prefWidth="845.0">
         <columns>
           <TableColumn fx:id="ID" prefWidth="146.0" text="ID" />
-          <TableColumn fx:id="name" minWidth="0.0" onEditCommit="#onEditName" prefWidth="511.0" text="Name" />
-            <TableColumn fx:id="quantity" minWidth="0.0" onEditCommit="#onEditAmount" prefWidth="99.0" text="Amount" />
-            <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="88.0" text="Price" />
+          <TableColumn fx:id="name" minWidth="0.0" onEditCommit="#onEditName" prefWidth="492.0" text="Name" />
+            <TableColumn fx:id="quantity" minWidth="0.0" onEditCommit="#onEditAmount" prefWidth="103.0" text="Amount" />
+            <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="103.0" text="Price" />
         </columns>
       </TableView>
       <TextField fx:id="textID" layoutX="927.0" layoutY="128.0" promptText="ID" />
-      <TextField fx:id="textName" layoutX="927.0" layoutY="183.0" promptText="Name" />
-      <TextField fx:id="textAmount" layoutX="927.0" layoutY="233.0" promptText="Amount" />
-      <TextField fx:id="textPrice" layoutX="930.0" layoutY="293.0" promptText="Price" />
-      <Button fx:id="addBtn" layoutX="1108.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleAddbtn" text="Add" />
+      <TextField fx:id="textName" layoutX="926.0" layoutY="167.0" promptText="Name" />
+      <TextField fx:id="textAmount" layoutX="926.0" layoutY="208.0" promptText="Amount" />
+      <TextField fx:id="textPrice" layoutX="927.0" layoutY="245.0" promptText="Price" />
+      <Button fx:id="addBtn" layoutX="1096.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleAddbtn" text="Add" />
       <Button fx:id="deletBtn" layoutX="1108.0" layoutY="220.0" mnemonicParsing="false" onAction="#deletHandle" text="Detete" />
-      <Button fx:id="handleOrderBtn" layoutX="972.0" layoutY="663.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="78.0" prefWidth="118.0" text="OrderLIst" />
-      <Label layoutX="365.0" layoutY="37.0" prefHeight="43.0" prefWidth="210.0" text="ProductList" />
-      <Label fx:id="eID" layoutX="926.0" layoutY="108.0" prefHeight="17.0" prefWidth="149.0" textFill="#f12008" />
-      <Label fx:id="eAmount" layoutX="930.0" layoutY="212.0" prefHeight="17.0" prefWidth="142.0" textFill="#f12008" />
-      <Label fx:id="ePrice" layoutX="926.0" layoutY="268.0" prefHeight="17.0" prefWidth="149.0" textFill="#f12008" />
-      <Label fx:id="eName" layoutX="930.0" layoutY="162.0" prefHeight="17.0" prefWidth="142.0" textFill="#f12008" />
+      <Button fx:id="handleOrderBtn" layoutX="926.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="78.0" prefWidth="118.0" text="OrderLIst" />
+      <Label layoutX="329.0" layoutY="54.0" prefHeight="43.0" prefWidth="210.0" text="ProductList">
+         <font>
+            <Font size="29.0" />
+         </font></Label>
+      <Pane layoutX="4.0" layoutY="7.0" prefHeight="61.0" prefWidth="1200.0">
+         <children>
+            <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="-1.0" layoutY="-3.0">
+               <image>
+                  <Image url="@picture/bike.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

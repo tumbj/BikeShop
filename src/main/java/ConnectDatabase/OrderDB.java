@@ -35,7 +35,7 @@ public class OrderDB {
         }
         return orders;
     }
-        public  ArrayList<OrderDetail>getOrderList(String orderID){
+    public  ArrayList<OrderDetail>getOrderList(String orderID){
         ArrayList<OrderDetail>orders=new ArrayList<>();
         try{
             Class.forName(dbName);
@@ -86,13 +86,13 @@ public class OrderDB {
         }
         return order_id;
     }
-    public  void updateOrder (String oid){ //แก้เป็นเบอร์โทร
+    public  void updateOrder (String oid){
         try {
             Class.forName(dbName);
             Connection connection = DriverManager .getConnection(dbURL);
 
             if(connection != null){
-                String query  = " UPDATE OrderList SET Status= '"+1+"' WHERE = '"+oid+"'";
+                String query  = " UPDATE OrderList SET Status = '1' WHERE Order_ID = '"+oid+"'";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 connection.close();

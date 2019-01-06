@@ -38,7 +38,8 @@ public class ShowOrderDetailController {
         this.orderID=OrderID;
         System.out.println("done setdis");
         orderDetails=orderDB.getOrderList(orderID);
-        subBtn.setDisable(false);
+        subBtn.setDisable(true);
+        subBtn.setVisible(false);
 
         ID.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("productID"));
         ID.setStyle("-fx-alignment: CENTER;");
@@ -77,12 +78,8 @@ public class ShowOrderDetailController {
             }
         }
         if(status==0) {
-            for (OrderDetail orderDetail : orderDetails) {
-                Product temp = productDataBase.getProduct(orderDetail.getProductID());
-                temp.setQuantity(temp.getQuantity()-orderDetail.getAmount());
-                productDataBase.update(temp);
-            }
-            s++;
+            subBtn.setDisable(false);
+            subBtn.setVisible(true);
         }
     }
     @FXML
@@ -95,14 +92,17 @@ public class ShowOrderDetailController {
     }
     @FXML
     public void handleSubBtn(ActionEvent event) throws Exception {
-        if(s==1){
-            orderDB.updateOrder(orderID);
-            subBtn= (Button) event.getSource();
-            Stage stage = (Stage) subBtn.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderLIst.fxml"));
-            stage.setScene(new Scene((Parent) loader.load()));
-            stage.show();
+        for (OrderDetail orderDetail : orderDetails) {
+            Product temp = productDataBase.getProduct(orderDetail.getProductID());
+            temp.setQuantity(temp.getQuantity()-orderDetail.getAmount());
+            productDataBase.update(temp);
         }
+        orderDB.updateOrder(orderID);
+        subBtn= (Button) event.getSource();
+        Stage stage = (Stage) subBtn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderLIst.fxml"));
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.show();
     }
 
 

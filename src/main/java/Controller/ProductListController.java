@@ -58,18 +58,30 @@ public class ProductListController {
     public void handleAddbtn(ActionEvent event) throws Exception {
         if((textID.getText().isEmpty()||textName.getText().isEmpty()||textAmount.getText().isEmpty()||textPrice.getText().isEmpty())){
            if(textID.getText().isEmpty()){
-               eID.setText("ID is Empty");
+               Alert alert = new Alert(Alert.AlertType.ERROR, "ID is Empty",ButtonType.OK);
+               alert.showAndWait();
+//               eID.setText("ID is Empty");
            } if (textName.getText().isEmpty()){
-               eName.setText("Name is Empty");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Empty",ButtonType.OK);
+                alert.showAndWait();
+               //eName.setText("Amount is Empty");
             }if(textAmount.getText().isEmpty()){
-                eAmount.setText("Amount is Empty");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is Empty",ButtonType.OK);
+                alert.showAndWait();
+              //  eAmount.setText("Amount is Empty");
             }if(textPrice.getText().isEmpty()) {
-               ePrice.setText("Price is Empty");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Price is Empty",ButtonType.OK);
+                alert.showAndWait();
+             //  ePrice.setText("Price is Empty");
             }
         }else if(checkIDsame(textID.getText())){
-            eID.setText("ID is Same");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "ID is Same",ButtonType.OK);
+            alert.showAndWait();
+           // eID.setText("ID is Same");
         }else if (checkNamesame(textName.getText())){
-            eName.setText("Name is same");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
+            alert.showAndWait();
+            //eName.setText("ID is Same");
         }else {
             String id=textID.getText();
             String name=textName.getText();

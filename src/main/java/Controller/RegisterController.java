@@ -97,8 +97,8 @@ public class RegisterController {
         }
 
     @FXML
-    protected void handleRegisterButtonAction(ActionEvent e)  {
-        String userID = userFill.getText();
+    protected void handleRegisterButtonAction(ActionEvent e) throws SQLException {
+        String userID = userFill.getText().toLowerCase();
         String passID = passwordFill.getText();
         String repassID = repasswordFill.getText();
         String firstname = firstnameFill.getText();
@@ -124,6 +124,20 @@ public class RegisterController {
                     factAllNumber =0;
                     if(i!=4) {
                         if(i!=5) {
+                            if(i==2||i==3){
+                                if ( ((str.charAt(j) > 47) && (str.charAt(j) < 65)) || ((str.charAt(j) > 90) && (str.charAt(j) < 97)) || (str.charAt(j) > 122)) {
+                                    haveSign = true;
+                                    Alert alert = new Alert(Alert.AlertType.WARNING,
+                                            "Input have special sign, please check again", ButtonType.OK);
+                                    alert.showAndWait();
+                                    if(i==2){
+                                        firstnameFill.setStyle("-fx-border-color: red");
+                                    }else{
+                                        lastnameFill.setStyle("-fx-border-color: red");;
+                                    }
+                                    break;
+                                }
+                            }
                             if ((str.charAt(j) < 48) || ((str.charAt(j) > 57) && (str.charAt(j) < 65)) || ((str.charAt(j) > 90) && (str.charAt(j) < 97)) || (str.charAt(j) > 122)) {
                                 haveSign = true;
                                 Alert alert = new Alert(Alert.AlertType.WARNING,
@@ -155,7 +169,7 @@ public class RegisterController {
                         }
                     }
                     if(i==4){
-                        System.out.println(str);
+
                         if((((str.charAt(j) == ')') || (str.charAt(j) == '('))  || (str.charAt(j) == '.') || (str.charAt(j) == '/') || (str.charAt(j) == '\\') || (str.charAt(j) == ' '))
                             || ((str.charAt(j)  >= 48) && (str.charAt(j) <= 57)) || ((str.charAt(j) > 64) && (str.charAt(j) <= 90)) || ((str.charAt(j) >= 97) && (str.charAt(j) <= 122))) {
                             if (((str.charAt(j) >= 48) && (str.charAt(j)  <= 57)) || str.charAt(j)  == ' ') {
@@ -184,13 +198,28 @@ public class RegisterController {
                 }
             }
             if(!haveSign && !addrHaveSign){
-                if(passID.equals(repassID)) {
+                if((CustomerDB.checkUsername(userID))){
+
+                    Alert alert = new Alert(Alert.AlertType.WARNING,
+                            "Username has been used", ButtonType.OK);
+                    alert.showAndWait();
+                    userFill.setStyle("-fx-border-color: red");;
+
+                }else if(CustomerDB.checkTelephoneNo(tel_number)){
+                    Alert alert = new Alert(Alert.AlertType.WARNING,
+                            "Telephone number  has been used", ButtonType.OK);
+                    alert.showAndWait();
+                    tel_numberFill.setStyle("-fx-border-color: red");
+                }
+                else if((passID.equals(repassID) ) ){
                     CustomerDB.register(userID, passID, repassID, firstname, lastname, address, tel_number);
                     navigateTo("/ShowProduct.fxml", e, 929, 592);
-                }else{
+                }else if(!passID.equals(repassID)){
                     Alert alert = new Alert(Alert.AlertType.WARNING,
-                            "re-password not match\n", ButtonType.OK);
+                            "re-password not match", ButtonType.OK);
                     alert.showAndWait();
+                    passwordFill.clear();
+                    repasswordFill.clear();
                 }
             }
 

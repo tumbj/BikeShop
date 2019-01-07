@@ -55,8 +55,6 @@ public class CustomerDB {
                 preparedStmt.setString (4, firstname);
                 preparedStmt.setString (5, lastname);
                 preparedStmt.setString (6, address);
-
-
                 preparedStmt.execute();
                 login(userID,passID);
                 conn.close();
@@ -71,4 +69,66 @@ public class CustomerDB {
 
     }
 
+    public static boolean checkUsername(String username){ // true if have data in DB
+        Connection conn = null;
+        try{
+            Class.forName(dbName);
+            conn = DriverManager .getConnection(dbURL) ;
+            Statement myStmt = conn.createStatement();
+
+            ResultSet myRs  = myStmt.executeQuery("select * from Customer where username" +
+                        " = '"  + username + "'" );
+
+            String username1 =myRs.getString("username");
+            conn.close();
+            if(username1!=null){
+                System.out.println(username1);
+                return true;
+            }
+            return false;
+
+        }
+        catch (Exception exc){
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+//            exc.printStackTrace();
+        }
+
+    }
+
+    public static boolean  checkTelephoneNo(String tel_number)  { // true if have data in DB
+        Connection conn = null;
+        try{
+            Class.forName(dbName);
+            conn = DriverManager .getConnection(dbURL);
+            Statement myStmt = conn.createStatement();
+
+            ResultSet myRs  = myStmt.executeQuery("select * from Customer where tel_number" +
+                    " = '"  + tel_number + "'" );
+
+            String telephone_number =myRs.getString("tel_number");
+
+            conn.close();
+            if(telephone_number!=null){
+                System.out.println(telephone_number);
+                return true;
+            }
+            return false;
+
+        }
+        catch (Exception exc){
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+//            exc.printStackTrace();
+        }
+
+    }
 }

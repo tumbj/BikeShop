@@ -16,7 +16,7 @@
    <children>
       <Line endX="82.0" endY="105.99998474121094" layoutX="-82.0" startX="676.2999877929688" startY="106.0" />
       <Line endX="608.1000366210938" endY="549.0" layoutX="-13.0" layoutY="-117.0" startX="12.999987602233887" startY="549.0" />
-      <Text layoutX="86.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uesrname:">
+      <Text layoutX="86.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
          <font>
             <Font size="28.0" />
          </font>

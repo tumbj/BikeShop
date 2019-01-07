@@ -59,7 +59,7 @@ public static String FROMPAGE ;
 
     @FXML
     protected void handleLoginButtonAction(MouseEvent e) throws SQLException, IOException {
-        String userID = usernameInput.getText();
+        String userID = usernameInput.getText().toLowerCase();
         String passID = pwdInput.getText();
 
         if(!StringUtils.isBlank(userID) && !StringUtils.isBlank(passID)){

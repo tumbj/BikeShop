@@ -65,6 +65,8 @@ public class ShowProductController {
     private Label numOrderLabel;
 
     @FXML
+    private Label showUserLabel;
+    @FXML
     private Button logoutBtn;
 
 
@@ -77,8 +79,12 @@ public class ShowProductController {
     public void initialize() {
         nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
-
-
+        if(customerToken!=null) {
+            showUserLabel.setText("user:  "+customerToken.getUsername());
+        }
+        else{
+            showUserLabel.setText("");
+        }
         if(checkRole()){
             managementBtn.setDisable(false);
             managementBtn.setOpacity(1);

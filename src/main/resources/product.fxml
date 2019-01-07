@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -24,6 +24,11 @@
                   <Button fx:id="registerBtn" layoutX="743.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleRegisterBtn" prefHeight="26.0" prefWidth="85.0" text="Register" />
                   <Button fx:id="logoutBtn" layoutX="837.0" layoutY="6.0" mnemonicParsing="false" onAction="#onActionHandleLogoutBtn" prefHeight="26.0" prefWidth="85.0" text="Logout" />
                   <Button fx:id="loginBtn" layoutX="837.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="26.0" prefWidth="85.0" text="Login" />
+                  <Label fx:id="showUserLabel" layoutX="94.0" layoutY="-1.0" prefHeight="34.0" prefWidth="429.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </items>
@@ -48,9 +53,14 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="quantityChoice" layoutX="544.0" layoutY="177.0" prefHeight="34.0" prefWidth="159.0" stylesheets="@styleChoicebox.css" />
       <Button layoutX="14.0" layoutY="468.0" mnemonicParsing="false" onAction="#onActionBackBtn" prefHeight="34.0" prefWidth="61.0" text="Back" />
       <Button fx:id="addToCartBtn" layoutX="596.0" layoutY="252.0" mnemonicParsing="false" onAction="#onActionAddToCartBtn" prefHeight="55.0" prefWidth="106.0" text="เลือกสินค้า" />
       <ImageView fx:id="showImage" fitHeight="210.0" fitWidth="243.0" layoutX="91.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="inputQuantity" layoutX="539.0" layoutY="175.0" prefHeight="42.0" prefWidth="114.0" />
+      <Label fx:id="maxQuantity" layoutX="671.0" layoutY="173.0" prefHeight="46.0" prefWidth="168.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,8 +1,10 @@
 package Controller;
 
+import ConnectDatabase.CustomerDB;
 import ConnectDatabase.OrderDB;
 import ConnectDatabase.OrderDetail;
 import Model.Cart;
+import Model.Customer;
 import Model.Product;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -54,8 +56,10 @@ public class CartController {
     OrderDB orderDB = new OrderDB();
     OrderDetail orderDetail = new OrderDetail();
 
+
     @FXML
     void initialize(){
+
         nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -120,8 +124,8 @@ public class CartController {
                 for (int i = 0; i < newAddressTextArea.getText().length(); i++) {
                     char tmp = newAddressTextArea.getText().charAt(i);
                     if (((tmp == ')') || (tmp == '(')) || ((tmp >= 48) && (tmp <= 57)) || (tmp == '.') || (tmp == '/') || (tmp == '\\') || ((tmp > 64) && (tmp <= 90)) || ((tmp >= 97) && (tmp <= 122)) || (tmp == ' ')) {
-                        System.out.println(tmp);
-                        System.out.println(tmp + 0);
+//                        System.out.println(tmp);
+//                        System.out.println(tmp + 0);
                         if (((tmp >= 48) && (tmp <= 57)) || tmp == ' ') {
                             factAllNumber++;
 //                        System.out.println(factAllNumber+"ssssssssssssss");
@@ -141,6 +145,7 @@ public class CartController {
                     alert.showAndWait();
                 } else {
                     customerToken.setAddress(newAddressTextArea.getText());
+                    CustomerDB.updateAddress(customerToken.getAddress());
                     System.out.println("new address " + customerToken.getAddress());
                 }
             }

@@ -131,4 +131,20 @@ public class CustomerDB {
         }
 
     }
+    public static void updateAddress(String newAddress){
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query  = " UPDATE customer SET address= '"+ newAddress +"'"+ " WHERE tel_number = '"+customerToken.getTel_number()+"';";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

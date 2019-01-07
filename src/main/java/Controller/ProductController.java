@@ -4,6 +4,7 @@ import ConnectDatabase.ProductDB;
 import Model.Cart;
 import Model.Product;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -39,8 +41,8 @@ public class ProductController {
     @FXML
     private Label priceLabel;
 
-    @FXML
-    private ChoiceBox<Integer> quantityChoice;
+//    @FXML
+//    private ChoiceBox<Integer> quantityChoice;
 
     @FXML
     private Button addToCartBtn;
@@ -48,21 +50,32 @@ public class ProductController {
     private ImageView showImage;
 
     private Product product;
+    @FXML
+    private Label showUserLabel;
 
+    @FXML
+    private Label maxQuantity;
+    @FXML
+    private TextField inputQuantity;
     public static Cart cart = Cart.getInstance();
     @FXML
     void initialize(){
-
+        if(customerToken!=null) {
+            showUserLabel.setText("user:  "+customerToken.getUsername());
+        }else{
+            showUserLabel.setText("");
+        }
         if(ProductDB.getProduct(PRODUCT_ID)!=null) {
             product = (ProductDB.getProduct(PRODUCT_ID));
             productNameLabel.setText(product.getName());
-            for (int i = 1; i <= product.getQuantity(); i++) {
-                quantityChoice.getItems().add(i);
-                if(i == product.getQuantity()){
-                    quantityChoice.setValue(i);
-                }
-            }
+//            for (int i = 1; i <= product.getQuantity(); i++) {
+//                quantityChoice.getItems().add(i);
+//                if(i == product.getQuantity()){
+//                    quantityChoice.setValue(i);
+//                }
+//            }
             showImage.setImage(new Image(product.getUrlImage()));
+            maxQuantity.setText("/"+product.getQuantity());
         }
         if(customerToken !=null){
             //enable logoutBtn
@@ -79,6 +92,20 @@ public class ProductController {
             logoutBtn.setDisable(true);
             logoutBtn.setOpacity(0);
         }
+
+        inputQuantity.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(inputQuantity.getText().matches("[0-9]+")) {
+//                if(isAllNumber(inputQuantity)) {
+                    if (Integer.parseInt(inputQuantity.getText()) > product.getQuantity()) {
+                        inputQuantity.setText(product.getQuantity() + "");
+                    }
+                }else{
+                    inputQuantity.setText("");
+                }
+            }
+        });
 
     }
 
@@ -158,7 +185,7 @@ public class ProductController {
         }
         else {
             cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
-                    , quantityChoice.getValue(),product.getUrlImage()));
+                    ,Integer.parseInt(inputQuantity.getText()),product.getUrlImage()));
 //            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
 //                    , quantityChoice.getValue()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION,
@@ -190,6 +217,7 @@ public class ProductController {
             initialize();
 
     }
+
 
 
 }

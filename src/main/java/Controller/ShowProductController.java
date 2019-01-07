@@ -17,7 +17,9 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Optional;
 
 import static ConnectDatabase.CustomerDB.customerToken;
 
@@ -263,7 +265,34 @@ public class ShowProductController {
         }
     }
 
+    @FXML
     public void onActionHandleSearchBtn(ActionEvent event) {
+        boolean found =false;
+        ArrayList<Product>tmpProducts = new ArrayList<>();
+        if(searchFill!=null){
+
+            for (Product product:allProducts) {
+//                found = Arrays.asList(product.getName().split(" ")).contains(searchFill.getText());
+                found = product.getName().contains(searchFill.getText());
+
+                if(found){
+                    tmpProducts.add(product);
+                }
+            }
+            if(tmpProducts.size()!=0){
+                products.clear();
+                products.addAll(tmpProducts);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                        "Not found product by name.");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    searchFill.clear();
+                    products.setAll(allProducts);
+
+                }
+            }
+        }
     }
 }
 

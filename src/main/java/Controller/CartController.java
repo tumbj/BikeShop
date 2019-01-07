@@ -18,6 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -110,46 +113,51 @@ public class CartController {
 
     @FXML
     void handleBuyBtn(ActionEvent event) {
-        if(addressChoiceBox.getValue().equals("new address")){
-            boolean textHaveSign =false;
-            int factAllNumber = 0;
-            for (int i = 0; i < newAddressTextArea.getText().length() ; i++) {
-                char tmp =newAddressTextArea.getText().charAt(i);
-                if(((tmp==')')||(tmp=='('))||((tmp>=48)&&(tmp<=57))||(tmp=='.')||(tmp=='/')||(tmp=='\\')||((tmp > 64) && (tmp <= 90)) || ((tmp >= 97) && (tmp <= 122)) || (tmp == ' ')){
-                    System.out.println(tmp);
-                    System.out.println(tmp+0);
-                    if(((tmp>=48)&&(tmp<=57))||tmp==' '){
-                        factAllNumber++;
-                        System.out.println(factAllNumber+"ssssssssssssss");
-                        System.out.println(newAddressTextArea.getText().length());
+        if(carts.size()!=0) {
+            if (addressChoiceBox.getValue().equals("new address")) {
+                boolean textHaveSign = false;
+                int factAllNumber = 0;
+                for (int i = 0; i < newAddressTextArea.getText().length(); i++) {
+                    char tmp = newAddressTextArea.getText().charAt(i);
+                    if (((tmp == ')') || (tmp == '(')) || ((tmp >= 48) && (tmp <= 57)) || (tmp == '.') || (tmp == '/') || (tmp == '\\') || ((tmp > 64) && (tmp <= 90)) || ((tmp >= 97) && (tmp <= 122)) || (tmp == ' ')) {
+                        System.out.println(tmp);
+                        System.out.println(tmp + 0);
+                        if (((tmp >= 48) && (tmp <= 57)) || tmp == ' ') {
+                            factAllNumber++;
+//                        System.out.println(factAllNumber+"ssssssssssssss");
+//                        System.out.println(newAddressTextArea.getText().length());
+                        }
+                    } else {
+                        textHaveSign = true;
+                        break;
+                    }
+                    if (factAllNumber == newAddressTextArea.getText().length()) {
+                        textHaveSign = true;
                     }
                 }
-
-                else {
-                    textHaveSign = true;
-                    break;
-                }
-                if(factAllNumber == newAddressTextArea.getText().length()){
-                    textHaveSign = true;
+                if (textHaveSign) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR,
+                            "new address can not have any sign or all number(example: !,@,#,$,%,^,&,*,-,+)", ButtonType.OK);
+                    alert.showAndWait();
+                } else {
+                    customerToken.setAddress(newAddressTextArea.getText());
+                    System.out.println("new address " + customerToken.getAddress());
                 }
             }
-            if(textHaveSign){
-                Alert alert = new Alert(Alert.AlertType.ERROR,
-                        "new address can not have any sign or all number(example: !,@,#,$,%,^,&,*,-,+)",ButtonType.OK);
-                alert.showAndWait();
-            }else{
-                customerToken.setAddress(newAddressTextArea.getText());
-                System.out.println("new address "+customerToken.getAddress());
+            DateTime jodaTime = new DateTime();
+
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YYYY");
+            orderDB.createOrder(formatter.print(jodaTime), customerToken.getTel_number());
+
+            for (Product product : carts) {
+                orderDetail.createOrderDetail(product, orderDB.getOrderByTel(customerToken.getTel_number()), customerToken.getTel_number());
+
             }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                    "complete.", ButtonType.OK);
+            alert.showAndWait();
+            handleBackBtn(event);
         }
-        orderDB.createOrder("22/12/61",customerToken.getTel_number());
-
-        for (Product product:carts) {
-            orderDetail.createOrderDetail(product,orderDB.getOrderByTel(customerToken.getTel_number()),customerToken.getTel_number());
-
-        }
-
-
 
     }
 

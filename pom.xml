@@ -49,6 +49,12 @@
             <version>5.0.0-RC3</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.1</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.jfxtras/jfxtras-labs -->
     </dependencies>
 </project>

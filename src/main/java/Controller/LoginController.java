@@ -7,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.junit.platform.commons.util.StringUtils;
 
 import java.io.IOException;
 import java.sql.*;
@@ -64,14 +62,29 @@ public static String FROMPAGE ;
         String userID = usernameInput.getText();
         String passID = pwdInput.getText();
 
-        CustomerDB.login(userID,passID);
-        System.out.println(customerToken.getUsername());
-        System.out.println(FROMPAGE);
-        if(FROMPAGE==null) {
-            navigateTo("/ShowProduct.fxml", e, 929, 592);
-        }else {
-            navigateTo(FROMPAGE,e, FROMWIDTH, FROMHEIGHT);
-            FROMPAGE =null;
+        if(!StringUtils.isBlank(userID) && !StringUtils.isBlank(passID)){
+            System.out.println(StringUtils.isBlank(userID) );
+            System.out.println(StringUtils.isBlank(passID) );
+            CustomerDB.login(userID,passID);
+            if(customerToken==null){
+                Alert alert = new Alert(Alert.AlertType.WARNING,
+                        "Please check username and password", ButtonType.OK);
+                alert.showAndWait();
+            }else{
+    //            System.out.println(customerToken.getUsername());
+    //            System.out.println(FROMPAGE);
+                if(FROMPAGE==null) {
+                    navigateTo("/ShowProduct.fxml", e, 929, 592);
+                }else {
+                    navigateTo(FROMPAGE,e, FROMWIDTH, FROMHEIGHT);
+                    FROMPAGE =null;
+                }
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING,
+                    "Please fill username or password.", ButtonType.OK);
+            alert.showAndWait();
+
         }
 
     }

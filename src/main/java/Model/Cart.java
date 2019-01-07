@@ -26,6 +26,9 @@ public class Cart {
             }
         }
     }
+    public void removeAll(){
+        products.clear();
+    }
 
 
 }

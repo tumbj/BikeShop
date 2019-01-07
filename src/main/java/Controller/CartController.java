@@ -156,6 +156,10 @@ public class CartController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION,
                     "complete.", ButtonType.OK);
             alert.showAndWait();
+//            System.out.println(carts.size());
+            cart.removeAll();
+//            carts.clear();
+//            System.out.println(carts.size());
             handleBackBtn(event);
         }
 

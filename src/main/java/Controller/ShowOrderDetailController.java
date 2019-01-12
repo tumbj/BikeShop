@@ -36,7 +36,6 @@ public class ShowOrderDetailController {
 
     public void setDisplay(String OrderID){
         this.orderID=OrderID;
-        System.out.println("done setdis");
         orderDetails=orderDB.getOrderList(orderID);
         subBtn.setDisable(true);
         subBtn.setVisible(false);
@@ -44,11 +43,8 @@ public class ShowOrderDetailController {
         ID.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("productID"));
         ID.setStyle("-fx-alignment: CENTER;");
         name.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("tel"));
-        System.out.printf("");
         quantity.setCellValueFactory(new PropertyValueFactory<OrderDetail,Integer>("amount"));
         price.setCellValueFactory(new PropertyValueFactory<OrderDetail,Double>("price"));
-
-
         tableView.setItems(addData(orderDB.getOrderList(orderID)));
 
     }
@@ -69,17 +65,19 @@ public class ShowOrderDetailController {
             String id=orderDetail.getProductID();
             Product temp;
             temp= productDataBase.getProduct(id);
-            if(temp.getQuantity()>=orderDetail.getAmount()){
-                label.setText("can buy");
-            }
+            if(temp.getQuantity()>=orderDetail.getAmount()){ }
             else {
-                label.setText("can not buy");
                 status++;
             }
         }
         if(status==0) {
             subBtn.setDisable(false);
             subBtn.setVisible(true);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Can buy ",ButtonType.OK);
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR, "can not buy product …not enough",ButtonType.OK);
+            alert.showAndWait();
         }
     }
     @FXML
@@ -100,9 +98,10 @@ public class ShowOrderDetailController {
         orderDB.updateOrder(orderID);
         subBtn= (Button) event.getSource();
         Stage stage = (Stage) subBtn.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderLIst.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Receipt.fxml"));
         stage.setScene(new Scene((Parent) loader.load()));
-        stage.show();
+        ReceiptController receiptController=loader.getController();
+        receiptController.setDisplay(orderID);
     }
 
 

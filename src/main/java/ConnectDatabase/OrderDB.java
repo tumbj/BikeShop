@@ -121,6 +121,28 @@ public class OrderDB {
             e.printStackTrace();
         }
     }
+    public String getNamebyID(String ID){
+        String name="";
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+
+            if (connection != null) {
+                String query = "select * from Product WHERE Product.ID='" + ID + "'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                name = resultSet.getString("name");
+
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
 
 
 

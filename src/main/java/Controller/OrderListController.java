@@ -59,13 +59,13 @@ public class OrderListController {
         return temp;
     }
     public  void handleGoBtn(ActionEvent event)throws Exception {
-;
-        Stage stage = (Stage) goBtn.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderDetail.fxml"));
+        if(o!=null){
+            Stage stage = (Stage) goBtn.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderDetail.fxml"));
             stage.setScene(new Scene(loader.load()));
             ShowOrderDetailController showOrderDeTailController = loader.getController();
-            System.out.println(o.getOrderID());
             showOrderDeTailController.setDisplay(o.getOrderID());
+        }
     }
 
     public Boolean checkFalse(ArrayList<Order>orders){
@@ -83,5 +83,20 @@ public class OrderListController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProductLIst.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.show();
+    }
+    public static boolean isAllNumber(TextField textField) {
+        boolean isCorrect = true;
+        for (int i = 0; i < textField.getText().length(); i++) {
+            if (isCorrect) {
+                if ((textField.getText().charAt(i) + "").matches("[0-9.]+")) {
+                } else {
+                    isCorrect = false;
+                    textField.setStyle("-fx-border-color: red");
+                    return isCorrect;
+                }
+            }
+        }
+        textField.setStyle("");
+        return isCorrect;
     }
 }

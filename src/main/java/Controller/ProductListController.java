@@ -47,6 +47,7 @@ public class ProductListController {
         name.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<Product,Integer>("quantity"));
         price.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
+        price.setStyle("-fx-alignment: center-right;");
         showTable();
         tableView.setEditable(true);
         name.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -63,7 +64,7 @@ public class ProductListController {
     }
     @FXML
     public void handleAddbtn(ActionEvent event) throws Exception {
-        if((textID.getText().isEmpty()||textName.getText().isEmpty()||textAmount.getText().isEmpty()||textPrice.getText().isEmpty())){
+        if((textID.getText().isEmpty()||textName.getText().isEmpty()||textAmount.getText().isEmpty()||textPrice.getText().isEmpty())||srcImage.isEmpty()){
            if(textID.getText().isEmpty()){
                Alert alert = new Alert(Alert.AlertType.ERROR, "ID is Empty",ButtonType.OK);
                alert.showAndWait();
@@ -80,12 +81,19 @@ public class ProductListController {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Price is Empty",ButtonType.OK);
                 alert.showAndWait();
              //  ePrice.setText("Price is Empty");
+            }if(srcImage.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Picture is Empty",ButtonType.OK);
+                alert.showAndWait();
             }
         }else if(checkIDsame(textID.getText())){
             Alert alert = new Alert(Alert.AlertType.ERROR, "ID is Same",ButtonType.OK);
             alert.showAndWait();
            // eID.setText("ID is Same");
         }else if (checkNamesame(textName.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
+            alert.showAndWait();
+            //eName.setText("ID is Same");
+        }else if (isAllNumber(textAmount)){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
             alert.showAndWait();
             //eName.setText("ID is Same");
@@ -100,12 +108,11 @@ public class ProductListController {
             textName.clear();
             textAmount.clear();
             textPrice.clear();
-//            eID.setText("");
-//            eAmount.setText("");
-//            ePrice.setText("");
-//            eName.setText("");
-
+            srcImage="";
+            upload.setImage(null);
             showTable();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Complete",ButtonType.OK);
+            alert.showAndWait();
         }
     }
     private boolean CheckTextEmpty(){
@@ -187,8 +194,21 @@ public class ProductListController {
         upload.setImage(new Image("file:///"+path));
         System.out.println("file:///"+path);
         srcImage="file:///"+path;
-
-
+    }
+    public static boolean isAllNumber(TextField textField) {
+        boolean isCorrect = true;
+        for (int i = 0; i < textField.getText().length(); i++) {
+            if (isCorrect) {
+                if ((textField.getText().charAt(i) + "").matches("[0-9.]+")) {
+                } else {
+                    isCorrect = false;
+                    textField.setStyle("-fx-border-color: red");
+                    return isCorrect;
+                }
+            }
+        }
+        textField.setStyle("");
+        return isCorrect;
     }
 
 

@@ -76,6 +76,7 @@ public class ProductController {
 //            }
             showImage.setImage(new Image(product.getUrlImage()));
             maxQuantity.setText("/"+product.getQuantity());
+            priceLabel.setText(product.getPrice()+"");
         }
         if(customerToken !=null){
             //enable logoutBtn

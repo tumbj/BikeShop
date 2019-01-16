@@ -114,13 +114,14 @@ public class OrderListController {
     }
     @FXML
     public void handleReceiptBtn(ActionEvent event)throws Exception {
-        if(o==null){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "pls chose cell in table",ButtonType.OK);
+        if(o==null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "pls chose cell in table", ButtonType.OK);
             alert.showAndWait();
         }else if(o.isStatus()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Status is True can't manage",ButtonType.OK);
             alert.showAndWait();
-        } else if(o!=null&&!o.isStatus()){
+//        } else if(o!=null&&!o.isStatus()){
+        }else{
             Receiptbtn= (Button) event.getSource();
             Stage stage = (Stage) Receiptbtn.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Receipt.fxml"));

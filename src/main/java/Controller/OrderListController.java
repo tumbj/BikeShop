@@ -120,8 +120,8 @@ public class OrderListController {
         }else if(o.isStatus()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Status is True can't manage",ButtonType.OK);
             alert.showAndWait();
-//        } else if(o!=null&&!o.isStatus()){
-        }else{
+        } else if(!o.isStatus()){
+
             Receiptbtn= (Button) event.getSource();
             Stage stage = (Stage) Receiptbtn.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Receipt.fxml"));

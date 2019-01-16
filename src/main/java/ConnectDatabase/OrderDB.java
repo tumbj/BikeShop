@@ -109,8 +109,8 @@ public class OrderDB {
             Class.forName(dbName);
             Connection connection = DriverManager .getConnection(dbURL);
             if (connection != null) {
-                String query = "insert into OrderList (Date,status,total,tel_number) values " +
-                        "('" + date+ "','" +"false" + "','" +"100','"+ cus_tel  + "')";
+                String query = "insert into OrderList (Date,status,tel_number) values " +
+                        "('" + date+ "','" +"false" + "','"+ cus_tel  + "')";
                 Statement p = connection.createStatement();
                 p.executeUpdate(query);
                 connection.close();
@@ -133,6 +133,7 @@ public class OrderDB {
                 ResultSet resultSet = statement.executeQuery(query);
                 name = resultSet.getString("name");
 
+
                 connection.close();
             }
         } catch (SQLException e) {
@@ -142,6 +143,49 @@ public class OrderDB {
         }
 
         return name;
+    }
+    public int getLateOrder_ID(){
+        ArrayList<Integer>allID = new ArrayList<>();
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+
+            if (connection != null) {
+                String query = "select Order_ID from OrderList";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    allID.add( resultSet.getInt("Order_ID"));
+
+                }
+                connection.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return allID.get(allID.size()-1);
+    }
+    public void setTotal(String o_id,double total){
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+
+            if(connection != null){
+                String query  = " UPDATE OrderList SET total = "+total+" WHERE Order_ID = '"+o_id+"'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

@@ -40,7 +40,7 @@ public class ProductListController {
     @FXML private ImageView  upload;
     private File file;
     private String srcImage="";
-    private Button Menu;
+    public Button Menu;
 
     @FXML
     public void initialize(){
@@ -50,6 +50,7 @@ public class ProductListController {
         quantity.setCellValueFactory(new PropertyValueFactory<Product,Integer>("quantity"));
         price.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
         price.setStyle("-fx-alignment: center-right;");
+        quantity.setStyle("-fx-alignment: CENTER;");
         showTable();
         tableView.setEditable(true);
         name.setCellFactory(TextFieldTableCell.forTableColumn());

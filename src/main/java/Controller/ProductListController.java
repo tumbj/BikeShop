@@ -96,7 +96,7 @@ public class ProductListController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
             alert.showAndWait();
             //eName.setText("ID is Same");
-        }else if (!isAllNumber(textAmount)){
+        }else if (!isAllNumberint(textAmount.getText())){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
             alert.showAndWait();
 
@@ -157,39 +157,51 @@ public class ProductListController {
 
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
-       if(isAllNumber(cellEditEvent.getNewValue()+"")){
-           Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-           if((Double)cellEditEvent.getNewValue()<=0){
-               Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
-               alert.showAndWait();
-           }else{
-               selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
-               productDataBase.update(selectedItem);
-               showTable();
-           }
-       }else{
-           Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
-           alert.showAndWait();
-       }
-
+        try {
+            if(isAllNumberint(String.valueOf(cellEditEvent.getNewValue()))){
+                Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+                System.out.println("kkkkkkkkkkkkkkkkkkkkk");
+                if((Integer)cellEditEvent.getNewValue()<=0){
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+                    alert.showAndWait();
+                }else{
+                    selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
+                    productDataBase.update(selectedItem);
+                    showTable();
+                }
+            }else{
+                System.out.println("ssssssssssssss");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+                alert.showAndWait();
+            }
+        }catch (NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+            alert.showAndWait();
+            showTable();
+        }
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
-        if(isAllNumber(cellEditEvent.getNewValue()+"")){
-         Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-         if((Double)cellEditEvent.getNewValue()<=0){
-             Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
-             alert.showAndWait();
-         }else {
-             selectedItem.setPrice((Double)cellEditEvent.getNewValue());
-             productDataBase.update(selectedItem);
-             showTable();
-         }
+        try {
+            if(isAllNumber(cellEditEvent.getNewValue()+"")){
+                Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+                if((Double)cellEditEvent.getNewValue()<=0){
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
+                    alert.showAndWait();
+                }else {
+                    selectedItem.setPrice((Double)cellEditEvent.getNewValue());
+                    productDataBase.update(selectedItem);
+                    showTable();
+                }
 
-        }else {
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
+                alert.showAndWait();
+            }
+        }catch (NumberFormatException e){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
             alert.showAndWait();
+            showTable();
         }
-
     }
     @FXML
     public void handleOrderBtn(ActionEvent event) throws IOException {
@@ -273,6 +285,33 @@ public class ProductListController {
         stage.setScene(new Scene((Parent) loader.load()));
         stage.show();
     }
-
+    public static boolean isAllNumberint(TextField textField) {
+        boolean isCorrect = true;
+        for (int i = 0; i < textField.getText().length(); i++) {
+            if (isCorrect) {
+                if ((textField.getText().charAt(i) + "").matches("[0-9]+")) {
+                } else {
+                    isCorrect = false;
+                    textField.setStyle("-fx-border-color: red");
+                    return isCorrect;
+                }
+            }
+        }
+        textField.setStyle("");
+        return isCorrect;
+    }
+    public static boolean isAllNumberint(String textField) {
+        boolean isCorrect = true;
+        for (int i = 0; i < textField.length(); i++) {
+            if (isCorrect) {
+                if ((textField.charAt(i) + "").matches("[0-9]+")) {
+                } else {
+                    isCorrect = false;
+                    return isCorrect;
+                }
+            }
+        }
+        return isCorrect;
+    }
 
 }

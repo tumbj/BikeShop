@@ -26,7 +26,7 @@
             </Label>
             </children>
         </Pane>
-      <TextArea fx:id="textReceipt" layoutX="14.0" layoutY="105.0" prefHeight="539.0" prefWidth="361.0">
+      <TextArea fx:id="textReceipt" layoutX="14.0" layoutY="105.0" prefHeight="539.0" prefWidth="335.0">
          <font>
             <Font size="16.0" />
          </font></TextArea>

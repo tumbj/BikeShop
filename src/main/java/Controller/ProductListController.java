@@ -102,7 +102,14 @@ public class ProductListController {
         }else if (!isAllNumber(textPrice)){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
             alert.showAndWait();
-        }else {
+        }else if(Integer.parseInt(textAmount.getText())<0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+            alert.showAndWait();
+        }else if(Double.parseDouble(textPrice.getText())<=0){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
+            alert.showAndWait();
+        }
+        else {
             String id=textID.getText();
             String name=textName.getText();
             int amonut=Integer.parseInt(textAmount.getText());
@@ -151,9 +158,14 @@ public class ProductListController {
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
        if(isAllNumber(cellEditEvent.getNewValue()+"")){
            Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-           selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
-           productDataBase.update(selectedItem);
-           showTable();
+           if((Double)cellEditEvent.getNewValue()<=0){
+               Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+               alert.showAndWait();
+           }else{
+               selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
+               productDataBase.update(selectedItem);
+               showTable();
+           }
        }else{
            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
            alert.showAndWait();
@@ -163,9 +175,15 @@ public class ProductListController {
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
         if(isAllNumber(cellEditEvent.getNewValue()+"")){
          Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-         selectedItem.setPrice((Double)cellEditEvent.getNewValue());
-         productDataBase.update(selectedItem);
-        showTable();
+         if((Double)cellEditEvent.getNewValue()<=0){
+             Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
+             alert.showAndWait();
+         }else {
+             selectedItem.setPrice((Double)cellEditEvent.getNewValue());
+             productDataBase.update(selectedItem);
+             showTable();
+         }
+
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
             alert.showAndWait();

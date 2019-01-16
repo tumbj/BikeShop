@@ -30,7 +30,7 @@ public class ProductListController {
     private TableView<Product> tableView;
     @FXML
     private TableColumn ID,name,quantity,price;
-    private ProductDataBase productDataBase;
+    private ProductDataBase productDataBase = new ProductDataBase();
     @FXML
     private TextField textID,textName,textAmount, textPrice;
     @FXML
@@ -168,7 +168,8 @@ public class ProductListController {
                 }else{
                     selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
                     ProductDataBase.update(selectedItem);
-                    System.out.println("asdasdasd");
+                    System.out.println(selectedItem.getQuantity());
+
                     showTable();
                 }
             }else{
@@ -181,6 +182,8 @@ public class ProductListController {
 //            alert.showAndWait();
 //            showTable();
 //        }
+
+
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
         try {

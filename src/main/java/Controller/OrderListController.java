@@ -81,6 +81,7 @@ public class OrderListController {
         }
         return false;
     }
+
     @FXML
     public void handleBackBtn(ActionEvent event) throws Exception {
         backBtn= (Button) event.getSource();
@@ -117,8 +118,8 @@ public class OrderListController {
         if(o==null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "pls chose cell in table", ButtonType.OK);
             alert.showAndWait();
-        }else if(o.isStatus()){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Status is True can't manage",ButtonType.OK);
+        }else if(!o.isStatus()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Status is False can't view ReceitBtn",ButtonType.OK);
             alert.showAndWait();
 //        } else if(o!=null&&!o.isStatus()){
         }else{

@@ -8,40 +8,44 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1293.0" prefWidth="1207.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductListController">
    <children>
-      <TableView fx:id="tableView" layoutX="52.0" layoutY="108.0" prefHeight="607.0" prefWidth="845.0">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="141.0" prefHeight="564.0" prefWidth="467.0">
         <columns>
-          <TableColumn fx:id="ID" prefWidth="146.0" text="ID" />
-          <TableColumn fx:id="name" minWidth="0.0" onEditCommit="#onEditName" prefWidth="492.0" text="Name" />
-            <TableColumn fx:id="quantity" minWidth="0.0" onEditCommit="#onEditAmount" prefWidth="103.0" text="Amount" />
-            <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="103.0" text="Price" />
+          <TableColumn fx:id="ID" prefWidth="123.0" text="ID" />
+          <TableColumn fx:id="name" minWidth="0.0" onEditCommit="#onEditName" prefWidth="126.0" text="Name" />
+            <TableColumn fx:id="quantity" minWidth="0.0" onEditCommit="#onEditAmount" prefWidth="121.0" text="Amount" />
+            <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="95.0" text="Price" />
         </columns>
       </TableView>
-      <TextField fx:id="textID" layoutX="927.0" layoutY="128.0" promptText="ID" />
-      <TextField fx:id="textName" layoutX="926.0" layoutY="167.0" promptText="Name" />
-      <TextField fx:id="textAmount" layoutX="926.0" layoutY="208.0" promptText="Amount" />
-      <TextField fx:id="textPrice" layoutX="927.0" layoutY="245.0" promptText="Price" />
-      <Button fx:id="addBtn" layoutX="1096.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleAddbtn" text="Add" />
-      <Button fx:id="deletBtn" layoutX="1108.0" layoutY="220.0" mnemonicParsing="false" onAction="#deletHandle" text="Detete" />
-      <Button fx:id="handleOrderBtn" layoutX="926.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="78.0" prefWidth="118.0" text="OrderLIst" />
-      <Label layoutX="329.0" layoutY="54.0" prefHeight="43.0" prefWidth="210.0" text="ProductList">
+      <TextField fx:id="textID" layoutX="496.0" layoutY="344.0" promptText="ID" />
+      <TextField fx:id="textName" layoutX="496.0" layoutY="369.0" promptText="Name" />
+      <TextField fx:id="textAmount" layoutX="496.0" layoutY="394.0" promptText="Amount" />
+      <TextField fx:id="textPrice" layoutX="496.0" layoutY="422.0" promptText="Price" />
+      <Button fx:id="addBtn" layoutX="493.0" layoutY="478.0" mnemonicParsing="false" onAction="#handleAddbtn" text="Add" />
+      <Button fx:id="deletBtn" layoutX="531.0" layoutY="478.0" mnemonicParsing="false" onAction="#deletHandle" text="Detete" />
+      <Button fx:id="handleOrderBtn" layoutX="595.0" layoutY="662.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="43.0" prefWidth="89.0" text="OrderLIst" />
+      <ImageView fx:id="upload" fitHeight="192.0" fitWidth="218.0" layoutX="493.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="loadPictureBtn" layoutX="493.0" layoutY="453.0" mnemonicParsing="false" onAction="#loadPicture" text="Load Picture" />
+      <Line endX="-25.0" endY="106.0" layoutX="25.0" layoutY="3.0" startX="716.0" startY="106.0" />
+      <ImageView fitHeight="73.0" fitWidth="75.0" layoutX="10.0" layoutY="19.0">
+         <image>
+            <Image url="@picture/bike.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="73.0" fitWidth="75.0" layoutX="646.0" layoutY="19.0">
+         <image>
+            <Image url="@picture/buy.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="271.0" layoutY="26.0" prefHeight="43.0" prefWidth="210.0" text="ProductList">
          <font>
             <Font size="29.0" />
-         </font></Label>
-      <Pane layoutX="4.0" layoutY="7.0" prefHeight="61.0" prefWidth="1200.0">
-         <children>
-            <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="-1.0" layoutY="-3.0">
-               <image>
-                  <Image url="@picture/bike.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <ImageView fx:id="upload" fitHeight="223.0" fitWidth="234.0" layoutX="927.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="loadPictureBtn" layoutX="1079.0" layoutY="503.0" mnemonicParsing="false" onAction="#loadPicture" text="Load Picture" />
+         </font>
+      </Label>
+      <Button fx:id="Menu" layoutX="506.0" layoutY="662.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="89.0" text="Menu" />
    </children>
 </AnchorPane>

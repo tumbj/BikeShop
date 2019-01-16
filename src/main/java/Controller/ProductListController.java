@@ -40,6 +40,8 @@ public class ProductListController {
     @FXML private ImageView  upload;
     private File file;
     private String srcImage="";
+    private Button Menu;
+
     @FXML
     public void initialize(){
         ID.setCellValueFactory(new PropertyValueFactory<Product,String>("id"));
@@ -93,10 +95,13 @@ public class ProductListController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
             alert.showAndWait();
             //eName.setText("ID is Same");
-        }else if (isAllNumber(textAmount)){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
+        }else if (!isAllNumber(textAmount)){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
             alert.showAndWait();
-            //eName.setText("ID is Same");
+
+        }else if (!isAllNumber(textPrice)){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
+            alert.showAndWait();
         }else {
             String id=textID.getText();
             String name=textName.getText();
@@ -115,10 +120,6 @@ public class ProductListController {
             alert.showAndWait();
         }
     }
-    private boolean CheckTextEmpty(){
-
-        return false;
-    }
     void showTable(){
         tableView.setItems(addData(productDataBase.getAllProduct()));
     }
@@ -132,22 +133,44 @@ public class ProductListController {
 
 
     public void onEditName(TableColumn.CellEditEvent cellEditEvent) {
-        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-        selectedItem.setName(cellEditEvent.getNewValue()+"");
-        productDataBase.update(selectedItem);
-        showTable();
+        if(checkNamesame(cellEditEvent.getNewValue()+"")){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
+            alert.showAndWait();
+
+        }else if ((cellEditEvent.getNewValue()+"").isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Empty",ButtonType.OK);
+            alert.showAndWait();
+        }else{
+            Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+            selectedItem.setName(cellEditEvent.getNewValue()+"");
+            productDataBase.update(selectedItem);
+            showTable();
+        }
+
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
-        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-        selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
-        productDataBase.update(selectedItem);
-        showTable();
+       if(isAllNumber(cellEditEvent.getNewValue()+"")){
+           Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+           selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
+           productDataBase.update(selectedItem);
+           showTable();
+       }else{
+           Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+           alert.showAndWait();
+       }
+
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
-        Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-        selectedItem.setPrice((Double)cellEditEvent.getNewValue());
-        productDataBase.update(selectedItem);
+        if(isAllNumber(cellEditEvent.getNewValue()+"")){
+         Product selectedItem = tableView.getSelectionModel().getSelectedItem();
+         selectedItem.setPrice((Double)cellEditEvent.getNewValue());
+         productDataBase.update(selectedItem);
         showTable();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
+            alert.showAndWait();
+        }
+
     }
     @FXML
     public void handleOrderBtn(ActionEvent event) throws IOException {
@@ -209,6 +232,27 @@ public class ProductListController {
         }
         textField.setStyle("");
         return isCorrect;
+    }
+    public static boolean isAllNumber(String textField) {
+        boolean isCorrect = true;
+        for (int i = 0; i < textField.length(); i++) {
+            if (isCorrect) {
+                if ((textField.charAt(i) + "").matches("[0-9.]+")) {
+                } else {
+                    isCorrect = false;
+                    return isCorrect;
+                }
+            }
+        }
+        return isCorrect;
+    }
+    @FXML
+    public void handleMenuBtn(ActionEvent event) throws IOException {
+        Menu= (Button) event.getSource();
+        Stage stage = (Stage)Menu.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.show();
     }
 
 

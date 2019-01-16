@@ -4,27 +4,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="893.0" prefWidth="1207.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShowOrderDetailController">
+<AnchorPane prefHeight="715.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShowOrderDetailController">
    <children>
-      <TableView fx:id="tableView" layoutX="52.0" layoutY="108.0" prefHeight="576.0" prefWidth="680.0">
+      <Label fx:id="label1" prefHeight="45.0" prefWidth="159.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Line endX="-15.0" endY="106.0" layoutX="15.0" layoutY="-7.0" startX="716.0" startY="106.0" />
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="616.0" layoutY="24.0">
+         <image>
+            <Image url="@picture/buy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="14.0" layoutY="4.0">
+         <image>
+            <Image url="@picture/bike.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableView" layoutX="21.0" layoutY="115.0" prefHeight="522.0" prefWidth="501.0">
         <columns>
-          <TableColumn fx:id="ID" prefWidth="146.0" text="ProductID" />
-            <TableColumn fx:id="quantity" minWidth="0.0" prefWidth="176.0" text="Amount" />
-            <TableColumn fx:id="price" prefWidth="140.0" text="Price" />
-          <TableColumn fx:id="name" minWidth="0.0" prefWidth="216.0" text="Tel" />
+          <TableColumn fx:id="ID" prefWidth="120.0" text="ProductID" />
+            <TableColumn fx:id="quantity" minWidth="0.0" prefWidth="98.0" text="Amount" />
+            <TableColumn fx:id="price" prefWidth="107.0" text="Price" />
+          <TableColumn fx:id="name" minWidth="0.0" prefWidth="167.0" text="Tel" />
         </columns>
       </TableView>
-      <Button fx:id="checkstock" layoutX="805.0" layoutY="495.0" mnemonicParsing="false" onAction="#handlecheckstock" prefHeight="71.0" prefWidth="102.0" text="Checkstock" />
-      <Label fx:id="label" layoutX="783.0" layoutY="100.0" prefHeight="276.0" prefWidth="364.0" />
-      <Button fx:id="backBtn" layoutX="872.0" layoutY="613.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="71.0" prefWidth="102.0" text="Back" />
-      <Label layoutX="282.0" layoutY="40.0" text="OrderDetail">
+      <Button fx:id="checkstock" layoutX="534.0" layoutY="346.0" mnemonicParsing="false" onAction="#handlecheckstock" prefHeight="45.0" prefWidth="82.0" text="Checkstock" />
+      <Button fx:id="backBtn" layoutX="534.0" layoutY="592.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="45.0" prefWidth="75.0" text="Back" />
+      <Label layoutX="259.0" layoutY="37.0" text="OrderDetail">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Button fx:id="subBtn" disable="true" layoutX="965.0" layoutY="495.0" mnemonicParsing="false" onAction="#handleSubBtn" prefHeight="71.0" prefWidth="121.0" text="Summit" />
+      <Button fx:id="subBtn" disable="true" layoutX="616.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleSubBtn" prefHeight="45.0" prefWidth="94.0" text="Summit" />
+      <Button fx:id="Menu" layoutX="609.0" layoutY="593.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="75.0" text="Menu" />
        </children>
 </AnchorPane>

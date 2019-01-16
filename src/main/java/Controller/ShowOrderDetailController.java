@@ -17,6 +17,7 @@ import Model.OrderDetail;
 import Model.Product;
 import Model.Order;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ShowOrderDetailController {
@@ -28,7 +29,7 @@ public class ShowOrderDetailController {
     private ProductDataBase productDataBase =new ProductDataBase();
     String orderID;
     @FXML
-    private Button checkstock,backBtn,subBtn;
+    private Button checkstock,backBtn,subBtn,Menu;
     @FXML
     private Label label;
     ArrayList<OrderDetail> orderDetails=orderDB.getOrderList(orderID);
@@ -98,10 +99,17 @@ public class ShowOrderDetailController {
         orderDB.updateOrder(orderID);
         subBtn= (Button) event.getSource();
         Stage stage = (Stage) subBtn.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Receipt.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderLIst.fxml"));
         stage.setScene(new Scene((Parent) loader.load()));
-        ReceiptController receiptController=loader.getController();
-        receiptController.setDisplay(orderID);
+        stage.show();
+    }
+    @FXML
+    public void handleMenuBtn(ActionEvent event) throws IOException {
+        Menu= (Button) event.getSource();
+        Stage stage = (Stage)Menu.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.show();
     }
 
 

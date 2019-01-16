@@ -48,9 +48,8 @@ public class ReceiptController {
         String s7= String.format("%-15s %5s %10s\n", "", "", "-----");
         String s6= String.format("%-15s %5s %10.2f\n", "Total", "",total);
 
-        System.out.println(s+s1+s2+s3+s4+s5+output+s7+s6);
         textReceipt.setText(s+s1+s2+s3+s4+s5+output+s7+s6);
-       kuy.setText(s+s1+s2+s3+s4+s5+output+s7+s6);
+
     }
     @FXML
     public void handleProductLIstBtn(ActionEvent event) throws IOException {

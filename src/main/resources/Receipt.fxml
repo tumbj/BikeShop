@@ -9,13 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReceiptController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReceiptController">
     <children>
-        <Button fx:id="OrderList" layoutX="547.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="61.0" prefWidth="105.0" text="OrderList" />
-        <Label layoutX="210.0" layoutY="88.0" prefHeight="43.0" prefWidth="210.0" text="Receipt">
-            <font>
-                <Font size="29.0" />
-            </font></Label>
+        <Button fx:id="OrderList" layoutX="402.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleOrderBtn" prefHeight="43.0" prefWidth="88.0" text="OrderList" />
         <Pane fx:id="text" layoutY="-1.0" prefHeight="68.0" prefWidth="901.0">
             <children>
                 <ImageView fitHeight="61.0" fitWidth="57.0" layoutY="4.0">
@@ -23,14 +19,18 @@
                         <Image url="@picture/bike.png" />
                     </image>
                 </ImageView>
+              <Label layoutX="80.0" layoutY="13.0" prefHeight="43.0" prefWidth="210.0" text="Receipt">
+                  <font>
+                      <Font size="29.0" />
+                  </font>
+            </Label>
             </children>
         </Pane>
-      <TextArea fx:id="textReceipt" layoutX="72.0" layoutY="154.0" prefHeight="539.0" prefWidth="628.0">
+      <TextArea fx:id="textReceipt" layoutX="14.0" layoutY="105.0" prefHeight="539.0" prefWidth="361.0">
          <font>
             <Font size="16.0" />
          </font></TextArea>
-      <Button fx:id="ProductLIst" layoutX="660.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleProductLIstBtn" prefHeight="61.0" prefWidth="105.0" text="ProductLIst" />
-      <Button fx:id="Menu" layoutX="772.0" layoutY="620.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="61.0" prefWidth="105.0" text="Menu" />
-      <TextArea fx:id="kuy" layoutX="440.0" layoutY="67.0" prefHeight="425.0" prefWidth="423.0" />
+      <Button fx:id="ProductLIst" layoutX="402.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleProductLIstBtn" prefHeight="43.0" prefWidth="88.0" text="ProductLIst" />
+      <Button fx:id="Menu" layoutX="403.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="88.0" text="Menu" />
     </children>
 </AnchorPane>

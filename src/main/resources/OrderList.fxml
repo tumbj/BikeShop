@@ -4,30 +4,51 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="893.0" prefWidth="1207.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderListController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderListController">
     <children>
-        <TableView fx:id="tableView" layoutX="218.0" layoutY="121.0" prefHeight="541.0" prefWidth="469.0">
+        <TableView fx:id="tableView" layoutX="32.0" layoutY="134.0" prefHeight="541.0" prefWidth="424.0">
             <columns>
                 <TableColumn fx:id="CustomerID" prefWidth="127.0" text="CustomerID" />
                 <TableColumn fx:id="OrderID" minWidth="0.0" prefWidth="154.0" text="OrderID" />
-                <TableColumn fx:id="Status" minWidth="0.0" prefWidth="187.0" text="Status" />
+                <TableColumn fx:id="Status" minWidth="0.0" prefWidth="142.0" text="Status" />
             </columns>
         </TableView>
-        <Button fx:id="backBtn" layoutX="741.0" layoutY="591.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="71.0" prefWidth="86.0" text="Back" />
-      <Button fx:id="goBtn" layoutX="882.0" layoutY="591.0" mnemonicParsing="false" onAction="#handleGoBtn" prefHeight="71.0" prefWidth="102.0" text="GO" />
+        <Button fx:id="backBtn" layoutX="484.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="45.0" prefWidth="86.0" text="Back" />
+      <Button fx:id="goBtn" layoutX="508.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleGoBtn" prefHeight="45.0" prefWidth="86.0" text="ManageOder" />
       <Label fx:id="label" layoutX="805.0" layoutY="66.0" prefHeight="45.0" prefWidth="233.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="359.0" layoutY="55.0" prefHeight="45.0" prefWidth="233.0" text="OrderLIst">
+      <Label layoutX="240.0" layoutY="32.0" prefHeight="45.0" prefWidth="233.0" text="OrderLIst">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="label1" layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="159.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Line endX="-25.0" endY="106.0" layoutX="25.0" layoutY="3.0" startX="716.0" startY="106.0" />
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="626.0" layoutY="34.0">
+         <image>
+            <Image url="@picture/buy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="24.0" layoutY="14.0">
+         <image>
+            <Image url="@picture/bike.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="Menu" layoutX="570.0" layoutY="639.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="86.0" text="Menu" />
+      <Button fx:id="Receiptbtn" layoutX="594.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleReceiptBtn" prefHeight="45.0" prefWidth="86.0" text="Receipt" />
     </children>
 
 </AnchorPane>

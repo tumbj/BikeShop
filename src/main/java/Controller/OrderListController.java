@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,7 +31,7 @@ public class OrderListController {
     private Label label;
 
     @FXML
-    Button goBtn,backBtn;
+    Button goBtn,backBtn,Menu,Receiptbtn;
     @FXML
     public void initialize() throws IOException {
         CustomerID.setCellValueFactory(new PropertyValueFactory<Order,String>("CustomerID"));
@@ -44,12 +45,9 @@ public class OrderListController {
         });
         tableView.setItems(addData(orderDB.getAllOrder()));
         if(checkFalse(orderDB.getAllOrder())){
-            label.setText("your Have Order");
-        }else {
-            label.setText("");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "you have order",ButtonType.OK);
+            alert.showAndWait();
         }
-
-
     }
     public ObservableList<Order> addData(ArrayList<Order> data){
         ObservableList<Order> temp= FXCollections.observableArrayList();
@@ -58,8 +56,15 @@ public class OrderListController {
         }
         return temp;
     }
-    public  void handleGoBtn(ActionEvent event)throws Exception {
-        if(o!=null){
+    public void handleGoBtn(ActionEvent event)throws Exception {
+        if(o==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "pls chose cell in table",ButtonType.OK);
+            alert.showAndWait();
+
+        }else if(o.isStatus()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Status is True can't manage",ButtonType.OK);
+            alert.showAndWait();
+        } else if (o!=null&&!o.isStatus()){
             Stage stage = (Stage) goBtn.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrderDetail.fxml"));
             stage.setScene(new Scene(loader.load()));
@@ -99,4 +104,32 @@ public class OrderListController {
         textField.setStyle("");
         return isCorrect;
     }
+    @FXML
+    public void handleMenuBtn(ActionEvent event) throws IOException {
+        Menu= (Button) event.getSource();
+        Stage stage = (Stage)Menu.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowProduct.fxml"));
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.show();
+    }
+    @FXML
+    public void handleReceiptBtn(ActionEvent event)throws Exception {
+        if(o==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "pls chose cell in table",ButtonType.OK);
+            alert.showAndWait();
+        }else if(o.isStatus()){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Status is True can't manage",ButtonType.OK);
+            alert.showAndWait();
+        } else if(o!=null&&!o.isStatus()){
+            Receiptbtn= (Button) event.getSource();
+            Stage stage = (Stage) Receiptbtn.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Receipt.fxml"));
+            stage.setScene(new Scene((Parent) loader.load()));
+            ReceiptController receiptController=loader.getController();
+            receiptController.setDisplay(o.getOrderID());
+
+        }
+    }
+
+
 }

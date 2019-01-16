@@ -147,7 +147,7 @@ public class ShowProductController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProductList.fxml"));
         try {
-            stage.setScene(new Scene((Parent) loader.load(), 1280,720));
+            stage.setScene(new Scene((Parent) loader.load()));
 
             stage.show();
 
@@ -300,5 +300,6 @@ public class ShowProductController {
             }
         }
     }
+
 }
 

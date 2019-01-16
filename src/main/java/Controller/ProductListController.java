@@ -30,7 +30,7 @@ public class ProductListController {
     private TableView<Product> tableView;
     @FXML
     private TableColumn ID,name,quantity,price;
-    private ProductDataBase productDataBase =new ProductDataBase();
+    private ProductDataBase productDataBase;
     @FXML
     private TextField textID,textName,textAmount, textPrice;
     @FXML
@@ -151,13 +151,14 @@ public class ProductListController {
         }else{
             Product selectedItem = tableView.getSelectionModel().getSelectedItem();
             selectedItem.setName(cellEditEvent.getNewValue()+"");
-            productDataBase.update(selectedItem);
+            ProductDataBase.update(selectedItem);
             showTable();
         }
 
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
-        try {
+//        try {
+//        if(cellEditEvent.getNewValue())
             if(isAllNumberint(String.valueOf(cellEditEvent.getNewValue()))){
                 Product selectedItem = tableView.getSelectionModel().getSelectedItem();
                 System.out.println("kkkkkkkkkkkkkkkkkkkkk");
@@ -166,7 +167,8 @@ public class ProductListController {
                     alert.showAndWait();
                 }else{
                     selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
-                    productDataBase.update(selectedItem);
+                    ProductDataBase.update(selectedItem);
+                    System.out.println("asdasdasd");
                     showTable();
                 }
             }else{
@@ -174,11 +176,11 @@ public class ProductListController {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
                 alert.showAndWait();
             }
-        }catch (NumberFormatException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
-            alert.showAndWait();
-            showTable();
-        }
+//        }catch (Exception e){
+//            Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
+//            alert.showAndWait();
+//            showTable();
+//        }
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
         try {
@@ -189,7 +191,7 @@ public class ProductListController {
                     alert.showAndWait();
                 }else {
                     selectedItem.setPrice((Double)cellEditEvent.getNewValue());
-                    productDataBase.update(selectedItem);
+                    ProductDataBase.update(selectedItem);
                     showTable();
                 }
 
@@ -254,6 +256,8 @@ public class ProductListController {
         for (int i = 0; i < textField.getText().length(); i++) {
             if (isCorrect) {
                 if ((textField.getText().charAt(i) + "").matches("[0-9.]+")) {
+                    System.out.println((textField.getText().charAt(i) ));
+
                 } else {
                     isCorrect = false;
                     textField.setStyle("-fx-border-color: red");
@@ -269,6 +273,7 @@ public class ProductListController {
         for (int i = 0; i < textField.length(); i++) {
             if (isCorrect) {
                 if ((textField.charAt(i) + "").matches("[0-9.]+")) {
+                    System.out.println(textField.charAt(i));
                 } else {
                     isCorrect = false;
                     return isCorrect;

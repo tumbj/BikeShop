@@ -121,7 +121,7 @@ public class OrderListController {
         }else if(!o.isStatus()){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Status is False can't view ReceitBtn",ButtonType.OK);
             alert.showAndWait();
-        } else if(!o.isStatus()){
+        } else if(o.isStatus()){
 
             Receiptbtn= (Button) event.getSource();
             Stage stage = (Stage) Receiptbtn.getScene().getWindow();

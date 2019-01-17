@@ -129,7 +129,7 @@ public class ProductDataBase {
                     int a = resultSet.getInt("quantity");
                     double p = resultSet.getDouble("Price");
                     String url = resultSet.getString("urlImage");
-                    products.add(new Product(id,name,String.format("%,.2f",p),a,url));
+                    products.add(new Product(id,name,String.format("%,.2f",p),String.format("%,d",a),url));
                 }
                 connection.close();
             }

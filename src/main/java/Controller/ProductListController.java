@@ -47,14 +47,14 @@ public class ProductListController {
         ID.setCellValueFactory(new PropertyValueFactory<Product,String>("id"));
         ID.setStyle("-fx-alignment: CENTER;");
         name.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
-        quantity.setCellValueFactory(new PropertyValueFactory<Product,Integer>("quantity"));
+        quantity.setCellValueFactory(new PropertyValueFactory<Product, String>("quantitys"));
         price.setCellValueFactory(new PropertyValueFactory<Product,String>("prices"));
         price.setStyle("-fx-alignment: center-right;");
-        quantity.setStyle("-fx-alignment: CENTER;");
+        quantity.setStyle("-fx-alignment: center-right;");
         showTable();
         tableView.setEditable(true);
         name.setCellFactory(TextFieldTableCell.forTableColumn());
-        quantity.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
+        quantity.setCellFactory(TextFieldTableCell.forTableColumn());
         price.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
@@ -148,40 +148,42 @@ public class ProductListController {
 
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
+
             if(isAllNumberint(String.valueOf(cellEditEvent.getNewValue()))){
                 Product selectedItem = tableView.getSelectionModel().getSelectedItem();
                 System.out.println("kkkkkkkkkkkkkkkkkkkkk");
-                if((Integer)cellEditEvent.getNewValue()<=0){
+                if(Integer.valueOf(cellEditEvent.getNewValue()+"") <=0){
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
                     alert.showAndWait();
                 }else{
-                    selectedItem.setQuantity((Integer)cellEditEvent.getNewValue());
+                    selectedItem.setQuantity(Integer.valueOf(detecom(cellEditEvent.getNewValue()+"")));
+                    selectedItem.setPrice(Double.parseDouble(detecom(selectedItem.getPrices())));
                     productDataBase.update(selectedItem);
-                    showTable();
                 }
             }else{
                 System.out.println("ssssssssssssss");
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
                 alert.showAndWait();
             }
+            showTable();
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
-
             if(isAllNumber(cellEditEvent.getNewValue()+"")){
                 Product selectedItem = tableView.getSelectionModel().getSelectedItem();
-                if((Double)cellEditEvent.getNewValue()<=0){
+                if(Double.valueOf(cellEditEvent.getNewValue()+"") <=0||Double.valueOf(cellEditEvent.getNewValue()+"")>=1000000){
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
                     alert.showAndWait();
                 }else {
-                    selectedItem.setPrice((Double)cellEditEvent.getNewValue());
+                    selectedItem.setPrice(Double.valueOf(detecom(cellEditEvent.getNewValue()+"")));
+                    selectedItem.setQuantity(Integer.parseInt(detecom(selectedItem.getQuantitys())));
                     productDataBase.update(selectedItem);
-                    showTable();
                 }
 
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Price is invaild",ButtonType.OK);
                 alert.showAndWait();
             }
+            showTable();
     }
     @FXML
     public void handleOrderBtn(ActionEvent event) throws IOException {
@@ -284,14 +286,24 @@ public class ProductListController {
         boolean isCorrect = true;
         for (int i = 0; i < textField.length(); i++) {
             if (isCorrect) {
-                if ((textField.charAt(i) + "").matches("[0-9]+")) {
-                } else {
+                if (!(textField.charAt(i) + "").matches("[0-9]+")) {
                     isCorrect = false;
                     return isCorrect;
+                } else {
+                    System.out.println(textField.charAt(i));
                 }
             }
         }
         return isCorrect;
     }
-
+    public String detecom(String a){
+        String string="";
+        for (int i = 0; i < a.length(); i++) {
+            if(a.charAt(i)==','){
+            }else {
+                string+=a.charAt(i);
+            }
+        }
+        return string;
+    }
 }

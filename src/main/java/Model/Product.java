@@ -6,6 +6,7 @@ public class Product {
     private double price;
     private String prices;
     private int quantity;
+    private String quantitys;
     private String urlImage;
 
     public Product(String id,String name, double price, int quantity,String urlImage) {
@@ -15,11 +16,11 @@ public class Product {
         this.quantity = quantity;
         this.urlImage = urlImage;
     }
-    public Product(String id,String name, String price, int quantity,String urlImage) {
+    public Product(String id,String name, String price,String quantity,String urlImage) {
         this.id = id;
         this.name = name;
         this.prices =price;
-        this.quantity = quantity;
+        this.quantitys = quantity;
         this.urlImage = urlImage;
     }
 
@@ -63,10 +64,17 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public String getQuantitys() {
+        return quantitys;
+    }
+
+    public void setQuantitys(String quantitys) {
+        this.quantitys = quantitys;
+    }
+
     public String getUrlImage() {
         return urlImage;
     }
-
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }

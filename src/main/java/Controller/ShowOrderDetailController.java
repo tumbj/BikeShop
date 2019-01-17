@@ -3,6 +3,7 @@ package Controller;
 
 import ConnectDatabase.OrderDB;
 import ConnectDatabase.ProductDataBase;
+import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,14 +25,14 @@ public class ShowOrderDetailController {
     @FXML
     private TableView<OrderDetail> tableView;
     @FXML
-    private TableColumn ID,name,quantity,price;
+    private TableColumn ID,name,quantity,price,CustomerName,ProductName;
     private OrderDB orderDB=new OrderDB();
     private ProductDataBase productDataBase =new ProductDataBase();
     String orderID;
     @FXML
     private Button checkstock,backBtn,subBtn,Menu;
     @FXML
-    private Label label;
+    private Label messageSt;
     ArrayList<OrderDetail> orderDetails=orderDB.getOrderList(orderID);
     private int s=0;
 
@@ -40,16 +41,21 @@ public class ShowOrderDetailController {
         orderDetails=orderDB.getOrderList(orderID);
         subBtn.setDisable(true);
         subBtn.setVisible(false);
+        messageSt.setVisible(false);
 
         ID.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("productID"));
         ID.setStyle("-fx-alignment: CENTER;");
         name.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("tel"));
         name.setStyle("-fx-alignment: CENTER;");
-        quantity.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("amount"));
+        CustomerName.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("CustomerName"));
+        CustomerName.setStyle("-fx-alignment: CENTER;");
+        ProductName.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("ProductName"));
+        ProductName.setStyle("-fx-alignment: CENTER;");
+        quantity.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("amounts"));
         quantity.setStyle("-fx-alignment: center-right;");
         price.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("prices"));
         price.setStyle("-fx-alignment: center-right;");
-        tableView.setItems(addData(orderDB.getOrderListSting(orderID)));
+        tableView.setItems(addData(orderDB.getOrderListCusPro(orderID)));
 
     }
 
@@ -74,11 +80,21 @@ public class ShowOrderDetailController {
                 status++;
             }
         }
+        String str="****Stock balance****\n";
         if(status==0) {
             subBtn.setDisable(false);
             subBtn.setVisible(true);
+            messageSt.setVisible(true);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Can buy ",ButtonType.OK);
             alert.showAndWait();
+            for (OrderDetail orderDetail : orderDetails) {
+                String id=orderDetail.getProductID();
+                Product temp;
+                temp= productDataBase.getProduct(id);
+                str+=temp.getName()+" : "+temp.getQuantity()+" -> ";
+                str+=temp.getQuantity()-orderDetail.getAmount()+"\n";
+            }
+            messageSt.setText(str);
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR, "can not buy product …not enough",ButtonType.OK);
             alert.showAndWait();

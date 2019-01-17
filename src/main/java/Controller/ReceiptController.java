@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,6 +25,8 @@ public class ReceiptController {
     @FXML
     TextArea textReceipt;
     @FXML
+    Label textReceipt1;
+    @FXML
     TextArea kuy;
     public void setDisplay(String order){
         double total=0;
@@ -37,18 +40,19 @@ public class ReceiptController {
         String s1=String.format("%-8s %5s %10s\n", "*", "bike shop Receipt","*");
         String s2=String.format("%-15s*%5s*%10s\n", "****************", "*****", "**********");
         String s3="Date: "+date+"\n";
-        String s4= String.format("%-15s %5s %10s\n", "Item", "Qty", "Price");
-        String s5= String.format("%-15s %5s %10s\n", "----", "---", "-----");
+        String s4= String.format("%-25s %5s %10s\n", "Item", "Qty", "Price");
+        String s5= String.format("%-25s %5s %10s\n", "----", "---", "-----");
         for (OrderDetail orderDetail : orderDetails) {
             double d=orderDetail.getAmount()*orderDetail.getPrice();
             total+=d;
-            String line = String.format("%-15s %5d %10.2f\n",orderDB.getNamebyID(orderDetail.getProductID()),orderDetail.getAmount(), orderDetail.getPrice());
+            String line = String.format("%-25s %5d %10.2f\n",orderDB.getNamebyID(orderDetail.getProductID()),orderDetail.getAmount(), orderDetail.getPrice());
             output+=line;
         }
-        String s7= String.format("%-15s %5s %10s\n", "", "", "-----");
-        String s6= String.format("%-15s %5s %10.2f\n", "Total", "",total);
-
+        String s7= String.format("%-25s %5s %10s\n", "", "", "-----");
+        String s6= String.format("%-25s %5s %10.2f\n", "Total", "",total);
+        //textReceipt1.setText(s+s1+s2+s3+s4+s5+output+s7+s6);
         textReceipt.setText(s+s1+s2+s3+s4+s5+output+s7+s6);
+        System.out.println(s+s1+s2+s3+s4+s5+output+s7+s6);
 
     }
     @FXML

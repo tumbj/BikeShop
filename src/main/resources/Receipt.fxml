@@ -32,5 +32,6 @@
          </font></TextArea>
       <Button fx:id="ProductLIst" layoutX="402.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleProductLIstBtn" prefHeight="43.0" prefWidth="88.0" text="ProductLIst" />
       <Button fx:id="Menu" layoutX="403.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="88.0" text="Menu" />
+      <Label fx:id="textReceipt1" alignment="TOP_LEFT" layoutX="24.0" layoutY="78.0" prefHeight="571.0" prefWidth="326.0" text="Label" textAlignment="JUSTIFY" />
     </children>
 </AnchorPane>

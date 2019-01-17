@@ -202,7 +202,7 @@ public class OrderDB {
                     String Oid=resultSet.getString("Order_ID");
                     String a=resultSet.getString("status");
                     String tel=resultSet.getString("Tel_number");
-                    orders.add(new Order(tel,Pid,Oid,Boolean.valueOf(a)));
+                    orders.add(new Order(tel,Pid,Oid,a.equals("1")));
                 }
                 connection.close();
             }
@@ -229,7 +229,7 @@ public class OrderDB {
                     double p=resultSet.getDouble("Price");
                     int a=resultSet.getInt("Amount");
                     String tel=resultSet.getString("Tel_number");
-                    orders.add(new OrderDetail(Pid,Oid,String.format("%,.2f",p),a,tel));
+                    orders.add(new OrderDetail(Pid,Oid,String.format("%,.2f",p),String.format("%,d",a),tel));
                 }
                 connection.close();
             }
@@ -244,7 +244,41 @@ public class OrderDB {
 
         return orders;
     }
+    public  ArrayList<OrderDetail>getOrderListCusPro(String orderID){
+        ArrayList<OrderDetail>orders=new ArrayList<>();
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query = "select OrderDetail.tel_number,Customer.first_name,OrderDetail.Product_ID,Product.name,OrderDetail.amount,OrderDetail.price \n" +
+                        "from OrderDetail\n" +
+                        "Inner join Customer on OrderDetail.tel_number = Customer.tel_number,Product \n" +
+                        "on OrderDetail.Product_ID = Product.ID\n" +
+                        "where OrderDetail.Order_ID= "+"'"+orderID+"'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String Pid =resultSet.getString("Product_ID");
+                    String pname=resultSet.getString("name");
+                    double p=resultSet.getDouble("price");
+                    int a=resultSet.getInt("amount");
+                    String tel=resultSet.getString("tel_number");
+                    String cname=resultSet.getString("first_name");
+                    orders.add(new OrderDetail(Pid,pname,cname,tel,String.format("%,.2f",p),String.format("%,d",a)));
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (OrderDetail order : orders) {
+            System.out.println(order);
+        }
 
+        return orders;
+    }
 
 
 }

@@ -6,6 +6,9 @@ public class OrderDetail {
     private double price;
     private String productID;
     private String prices;
+    private String amounts;
+    private String ProductName;
+    private String CustomerName;
 
     public String getOrderID() {
         return OrderID;
@@ -49,12 +52,33 @@ public class OrderDetail {
         this.price = price;
         this.OrderID=orderID;
     }
-    public OrderDetail(String productID,String orderID, String price, int amount,String tel ) {
+    public OrderDetail(String productID,String orderID, String price, String amount,String tel ) {
         this.productID = productID;
         this.tel = tel;
-        this.amount = amount;
+        this.amounts = amount;
         this.prices = price;
         this.OrderID=orderID;
+    }
+    public OrderDetail(String productID,String productName,String c,String tel ,String price,String amount ) {
+        this.productID = productID;
+        this.tel = tel;
+        this.amounts = amount;
+        this.prices = price;
+        this.ProductName=productName;
+        this.CustomerName=c;
+    }
+
+
+    public String getAmounts() {
+        return amounts;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
     }
 
     @Override

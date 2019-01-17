@@ -157,6 +157,7 @@ public class ProductListController {
 
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
+
             if(isAllNumberint(String.valueOf(cellEditEvent.getNewValue()))){
                 Product selectedItem = tableView.getSelectionModel().getSelectedItem();
                 System.out.println("kkkkkkkkkkkkkkkkkkkkk");
@@ -168,14 +169,15 @@ public class ProductListController {
                     productDataBase.update(selectedItem);
                     showTable();
                 }
-            }else {
+            }else{
                 System.out.println("ssssssssssssss");
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
                 alert.showAndWait();
-
             }
+
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
+
             if(isAllNumber(cellEditEvent.getNewValue()+"")){
                 Product selectedItem = tableView.getSelectionModel().getSelectedItem();
                 if((Double)cellEditEvent.getNewValue()<=0){

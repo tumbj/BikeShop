@@ -185,14 +185,16 @@ public class ProductController {
             }
         }
         else {
-            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
-                    ,Integer.parseInt(inputQuantity.getText()),product.getUrlImage()));
+            if(Integer.parseInt(inputQuantity.getText())>0) {
+                cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
+                        , Integer.parseInt(inputQuantity.getText()), product.getUrlImage()));
 //            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
 //                    , quantityChoice.getValue()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                    "Add to cart complete, please check in cart",ButtonType.OK);
-            Optional<ButtonType> result = alert.showAndWait();
-            System.out.println("!@#123123");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                        "Add to cart complete, please check in cart", ButtonType.OK);
+                Optional<ButtonType> result = alert.showAndWait();
+                System.out.println("!@#123123");
+            }
 
         }
     }

@@ -25,7 +25,7 @@
                   </ImageView>
                   <Button fx:id="registerBtn" layoutX="732.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleRegisterBtn" prefHeight="26.0" prefWidth="85.0" text="Register" />
                   <Button fx:id="logoutBtn" layoutX="826.0" layoutY="6.0" mnemonicParsing="false" onAction="#onActionHandleLogoutBtn" prefHeight="26.0" prefWidth="85.0" text="Logout" />
-                <Button fx:id="loginBtn" layoutX="826.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="26.0" prefWidth="85.0" text="Login" />
+                  <Button fx:id="loginBtn" layoutX="826.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="26.0" prefWidth="85.0" text="Login" />
                </children>
             </Pane>
          </items>
@@ -41,10 +41,10 @@
          </children>
       </Pane>
       <TableView fx:id="tableView" layoutX="185.0" layoutY="128.0" prefHeight="407.0" prefWidth="634.0">
-        <columns>
-          <TableColumn fx:id="nameCol" prefWidth="543.2000579833984" text="Product Name" />
-          <TableColumn fx:id="quantityCol" prefWidth="90.39990234375" text="Quantity" />
-        </columns>
+         <columns>
+            <TableColumn fx:id="nameCol" prefWidth="543.2000579833984" text="Product Name" />
+            <TableColumn fx:id="quantityCol" prefWidth="90.39990234375" text="Quantity" />
+         </columns>
       </TableView>
       <Button fx:id="goBtn" layoutX="833.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionGoBtn" prefHeight="34.0" prefWidth="62.0" text="Go" />
       <Button fx:id="cartBtn" layoutX="702.0" layoutY="72.0" mnemonicParsing="false" onAction="#onActionCartBtn" prefHeight="34.0" prefWidth="71.0" text="Cart" />

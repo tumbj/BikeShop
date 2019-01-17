@@ -79,6 +79,7 @@ public class ProductDataBase {
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 connection.close();
+                System.out.println("update complete");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

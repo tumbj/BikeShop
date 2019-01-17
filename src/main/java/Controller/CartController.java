@@ -153,11 +153,13 @@ public class CartController {
 
             DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YYYY");
             orderDB.createOrder(formatter.print(jodaTime), customerToken.getTel_number());
+            double total  = 0;
 
             for (Product product : carts) {
-                orderDetail.createOrderDetail(product, orderDB.getOrderByTel(customerToken.getTel_number()), customerToken.getTel_number());
-
+                orderDetail.createOrderDetail(product, orderDB.getLateOrder_ID()+"", customerToken.getTel_number());
+                total+= product.getPrice()*product.getQuantity();
             }
+            orderDB.setTotal(orderDB.getLateOrder_ID()+"",total);
             Alert alert = new Alert(Alert.AlertType.INFORMATION,
                     "complete.", ButtonType.OK);
             alert.showAndWait();

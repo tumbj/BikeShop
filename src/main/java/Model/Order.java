@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Stack;
+
 public class Order {
     private String CustomerID;
     private String CustomerName;
@@ -50,5 +52,9 @@ public class Order {
 
     public void setStatus(boolean status) {
         Status = status;
+    }
+
+    public boolean getStatus(){
+        return Status;
     }
 }

@@ -1,6 +1,7 @@
 package Controller;
 
 import ConnectDatabase.ProductDB;
+import Model.Cart;
 import Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +26,8 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import static ConnectDatabase.CustomerDB.customerToken;
-
+import static Controller.CartController.cart;
+import static Controller.CartController.cartForShow;
 
 
 public class ShowProductController {
@@ -69,16 +74,23 @@ public class ShowProductController {
     @FXML
     private Button logoutBtn;
 
+    @FXML
+    private Label dateLabel;
 
     public static String PRODUCT_ID="";
 
     ObservableList<Product> products = FXCollections.observableArrayList();
 
     ArrayList<Product> allProducts = new ArrayList<>();
+
     @FXML
     public void initialize() {
         nameCol.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
+        quantityCol.setStyle("-fx-alignment: center-right;");
+        DateTime jodaTime = new DateTime();
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YYYY");
+        dateLabel.setText(formatter.print(jodaTime));
         if(customerToken!=null) {
             showUserLabel.setText("user:  "+customerToken.getUsername());
         }
@@ -112,21 +124,39 @@ public class ShowProductController {
             logoutBtn.setDisable(true);
             logoutBtn.setOpacity(0);
         }
-        setAllData();
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         quantityCol.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
         tableView.setItems(products);
         if (customerToken != null) {
             loginBtn.setOpacity(0);
             loginBtn.setDisable(true);
+            if(customerToken.getUsername().equals("admin")){
+                cartForShow.getProducts().clear();
+                System.out.println("clearrrrr");
+            }
         }
+        setAllData();
 
     }
 
     void setAllData() {
         allProducts.clear();
         allProducts.addAll(ProductDB.getAllProduct());
+        mergeQuantity();
         products.setAll(allProducts);
+    }
+
+    void mergeQuantity(){
+//        System.out.println(cartForShow.getProducts().size());
+        for(Product product : cartForShow.getProducts()){
+            for (Product product1: allProducts) {
+                 if(product.getId().equals(product1.getId())){
+                     product1.setQuantity(product1.getQuantity()-product.getQuantity());
+//                     System.out.println(product1.getName()+" "+
+//                             product1.getQuantity() + product.getQuantity());
+                 }
+            }
+        }
     }
 
 
@@ -219,6 +249,7 @@ public class ShowProductController {
     void onActionHandleLogoutBtn(ActionEvent event) {
 
         customerToken = null;
+
         initialize();
     }
 

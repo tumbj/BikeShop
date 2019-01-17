@@ -16,9 +16,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Optional;
 
 import static ConnectDatabase.CustomerDB.customerToken;
+import static Controller.CartController.cart;
+import static Controller.CartController.cartForShow;
 import static Controller.ShowProductController.PRODUCT_ID;
 import static Controller.LoginController.FROMHEIGHT;
 import static Controller.LoginController.FROMPAGE;
@@ -57,7 +60,6 @@ public class ProductController {
     private Label maxQuantity;
     @FXML
     private TextField inputQuantity;
-    public static Cart cart = Cart.getInstance();
     @FXML
     void initialize(){
         if(customerToken!=null) {
@@ -75,8 +77,13 @@ public class ProductController {
 //                }
 //            }
             showImage.setImage(new Image(product.getUrlImage()));
+            mergeQuantity();
             maxQuantity.setText("/"+product.getQuantity());
-            priceLabel.setText(product.getPrice()+"");
+
+            String number = product.getPrice()+"";
+            double amount = Double.parseDouble(number);
+            DecimalFormat formatter = new DecimalFormat("#,###.00");
+            priceLabel.setText(formatter.format(amount)+"");
         }
         if(customerToken !=null){
             //enable logoutBtn
@@ -110,7 +117,27 @@ public class ProductController {
 
     }
 
+    void mergeQuantity(){
+        if(cartForShow!=null){
+            for (Product product1 : cartForShow.getProducts()) {
 
+                if (product1.getId().equals(product.getId())) {
+                    product.setQuantity(product.getQuantity() - product1.getQuantity());
+                }
+
+            }
+        }else {
+            for (Product product1 : cart.getProducts()) {
+
+                if (product1.getId().equals(product.getId())) {
+                    product.setQuantity(product.getQuantity() - product1.getQuantity());
+//                     System.out.println(product1.getName()+" "+
+//                             product1.getQuantity() + product.getQuantity());
+                }
+
+            }
+        }
+    }
 
 
     @FXML
@@ -187,6 +214,8 @@ public class ProductController {
         else {
             if(Integer.parseInt(inputQuantity.getText())>0) {
                 cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
+                        , Integer.parseInt(inputQuantity.getText()), product.getUrlImage()));
+                cartForShow.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
                         , Integer.parseInt(inputQuantity.getText()), product.getUrlImage()));
 //            cart.addProduct(new Product(product.getId(), product.getName(), product.getPrice()
 //                    , quantityChoice.getValue()));

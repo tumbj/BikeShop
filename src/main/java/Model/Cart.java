@@ -30,5 +30,9 @@ public class Cart {
         products.clear();
     }
 
+    public Product getProduct(int index){
+        return products.get(index);
+    }
+
 
 }

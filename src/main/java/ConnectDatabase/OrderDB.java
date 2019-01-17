@@ -202,6 +202,9 @@ public class OrderDB {
                     String Oid=resultSet.getString("Order_ID");
                     String a=resultSet.getString("status");
                     String tel=resultSet.getString("Tel_number");
+                    if(a.equals("1")){
+                        a= "true";
+                    }
                     orders.add(new Order(tel,Pid,Oid,Boolean.valueOf(a)));
                 }
                 connection.close();

@@ -53,6 +53,7 @@ public class OrderListController {
     public ObservableList<Order> addData(ArrayList<Order> data){
         ObservableList<Order> temp= FXCollections.observableArrayList();
         for (Order i:data){
+            System.out.println(i.getStatus());
             temp.add(i);
         }
         return temp;

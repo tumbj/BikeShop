@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static ConnectDatabase.CustomerDB.customerToken;
-import static Controller.ProductController.cart;
+
 
 public class CartController {
     @FXML
@@ -55,6 +55,8 @@ public class CartController {
     ObservableList<Product> carts = FXCollections.observableArrayList();
     OrderDB orderDB = new OrderDB();
     OrderDetail orderDetail = new OrderDetail();
+    public static Cart cart = Cart.getInstance();
+    public static Cart cartForShow = Cart.getInstance();
 
 
     @FXML
@@ -96,7 +98,29 @@ public class CartController {
 
     }
     void setAllData(){
+        for (int i = 0 ;i< cart.getProducts().size() ;i++) {
+            for (int j = i+1; j < cart.getProducts().size(); j++) {
+                if(cart.getProducts().get(i).getId().equals(cart.getProducts().get(j).getId())){
+                    cart.getProducts().get(i).setQuantity(cart.getProducts().get(i).getQuantity()+cart.getProducts().get(j).getQuantity());
+                    cart.getProducts().remove(j);
+
+                }
+            }
+        }
         carts.addAll(cart.getProducts());
+//        for (Product product:cart.getProducts()) {
+//            cartForShow.addProduct(product);
+//        }
+        for (int i = 0 ;i< cartForShow.getProducts().size() ;i++) {
+            for (int j = i+1; j < cartForShow.getProducts().size(); j++) {
+                if(cartForShow.getProducts().get(i).getId().equals(cartForShow.getProducts().get(j).getId())){
+                    cartForShow.getProducts().get(i).setQuantity(cartForShow.getProducts().get(i).getQuantity()+cartForShow.getProducts().get(j).getQuantity());
+                    cartForShow.getProducts().remove(j);
+
+                }
+            }
+        }
+        System.out.println(cart.getProducts().size());
     }
     @FXML
     void handleBackBtn(ActionEvent event) {
@@ -174,8 +198,9 @@ public class CartController {
 
     @FXML
     void handleDeleteBtn(ActionEvent event) {
-        carts.remove(tableView.getSelectionModel().getSelectedItem());
+        cartForShow.removeProduct(tableView.getSelectionModel().getSelectedItem().getId());
         cart.removeProduct(tableView.getSelectionModel().getSelectedItem().getId());
+        carts.remove(tableView.getSelectionModel().getSelectedItem());
 
     }
 

@@ -245,7 +245,7 @@ public class ShowProductController {
     void onActionBikeCategoryBtn(ActionEvent event) {
         products.clear();
         for (Product product:allProducts) {
-            if(product.getId().substring(0,1).equals("0")){
+            if(product.getId().substring(0,1).equals("1")){
                products.add(product);
             }
         }
@@ -255,7 +255,7 @@ public class ShowProductController {
     void onActionBikeAccessCategoryBtn(ActionEvent event) {
         products.clear();
         for (Product product:allProducts) {
-            if(product.getId().substring(0,1).equals("1")){
+            if(product.getId().substring(0,1).equals("2")){
                 products.add(product);
             }
         }
@@ -265,7 +265,7 @@ public class ShowProductController {
     void onActionAccessCategoryBtn(ActionEvent event) {
         products.clear();
         for (Product product:allProducts) {
-            if(product.getId().substring(0,1).equals("2")){
+            if(product.getId().substring(0,1).equals("3")){
                 products.add(product);
             }
         }

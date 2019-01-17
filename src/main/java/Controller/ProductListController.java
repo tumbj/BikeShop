@@ -141,19 +141,10 @@ public class ProductListController {
 
 
     public void onEditName(TableColumn.CellEditEvent cellEditEvent) {
-        if(checkNamesame(cellEditEvent.getNewValue()+"")){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Same",ButtonType.OK);
-            alert.showAndWait();
-
-        }else if ((cellEditEvent.getNewValue()+"").isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Name is Empty",ButtonType.OK);
-            alert.showAndWait();
-        }else{
             Product selectedItem = tableView.getSelectionModel().getSelectedItem();
             selectedItem.setName(cellEditEvent.getNewValue()+"");
             productDataBase.update(selectedItem);
             showTable();
-        }
 
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
@@ -173,7 +164,6 @@ public class ProductListController {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Amount is invaild",ButtonType.OK);
                 alert.showAndWait();
             }
-
     }
     public void onEditPrice(TableColumn.CellEditEvent cellEditEvent) {
 

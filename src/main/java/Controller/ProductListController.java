@@ -157,7 +157,6 @@ public class ProductListController {
 
     }
     public void onEditAmount(TableColumn.CellEditEvent cellEditEvent) {
-
             if(isAllNumberint(String.valueOf(cellEditEvent.getNewValue()))){
                 Product selectedItem = tableView.getSelectionModel().getSelectedItem();
                 System.out.println("kkkkkkkkkkkkkkkkkkkkk");

@@ -48,14 +48,14 @@ public class ProductListController {
         ID.setStyle("-fx-alignment: CENTER;");
         name.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
         quantity.setCellValueFactory(new PropertyValueFactory<Product,Integer>("quantity"));
-        price.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
+        price.setCellValueFactory(new PropertyValueFactory<Product,String>("prices"));
         price.setStyle("-fx-alignment: center-right;");
         quantity.setStyle("-fx-alignment: CENTER;");
         showTable();
         tableView.setEditable(true);
         name.setCellFactory(TextFieldTableCell.forTableColumn());
         quantity.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
-        price.setCellFactory(TextFieldTableCell.<Product, Double>forTableColumn(new DoubleStringConverter()));
+        price.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     public ObservableList<Product> addData(ArrayList<Product> data){
@@ -129,7 +129,7 @@ public class ProductListController {
         }
     }
     void showTable(){
-        tableView.setItems(addData(productDataBase.getAllProduct()));
+        tableView.setItems(addData(productDataBase.getAllProductS()));
     }
 
     public void deletHandle(ActionEvent event)throws Exception{

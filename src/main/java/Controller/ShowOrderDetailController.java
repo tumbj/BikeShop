@@ -44,9 +44,12 @@ public class ShowOrderDetailController {
         ID.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("productID"));
         ID.setStyle("-fx-alignment: CENTER;");
         name.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("tel"));
-        quantity.setCellValueFactory(new PropertyValueFactory<OrderDetail,Integer>("amount"));
-        price.setCellValueFactory(new PropertyValueFactory<OrderDetail,Double>("price"));
-        tableView.setItems(addData(orderDB.getOrderList(orderID)));
+        name.setStyle("-fx-alignment: CENTER;");
+        quantity.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("amount"));
+        quantity.setStyle("-fx-alignment: center-right;");
+        price.setCellValueFactory(new PropertyValueFactory<OrderDetail,String>("prices"));
+        price.setStyle("-fx-alignment: center-right;");
+        tableView.setItems(addData(orderDB.getOrderListSting(orderID)));
 
     }
 

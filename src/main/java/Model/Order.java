@@ -2,6 +2,7 @@ package Model;
 
 public class Order {
     private String CustomerID;
+    private String CustomerName;
     private String OrderID;
     private boolean Status;
 
@@ -10,6 +11,21 @@ public class Order {
         OrderID = orderID;
         Status = status;
 
+    }
+    public Order(String customerID,String customerName, String orderID, boolean status) {
+        CustomerID = customerID;
+        OrderID = orderID;
+        Status = status;
+        CustomerName=customerName;
+
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
     }
 
     public String getCustomerID() {

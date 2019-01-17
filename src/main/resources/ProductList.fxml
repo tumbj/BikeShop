@@ -11,13 +11,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductListController">
    <children>
       <TableView fx:id="tableView" layoutX="14.0" layoutY="141.0" prefHeight="564.0" prefWidth="467.0">
         <columns>
           <TableColumn fx:id="ID" prefWidth="123.0" text="ID" />
           <TableColumn fx:id="name" minWidth="0.0" onEditCommit="#onEditName" prefWidth="126.0" text="Name" />
-            <TableColumn fx:id="quantity" minWidth="0.0" onEditCommit="#onEditAmount" prefWidth="121.0" text="Amount" />
+            <TableColumn fx:id="quantity" minWidth="0.0" onEditCommit="#onEditAmount" prefWidth="121.0" text="Quantity" />
             <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="95.0" text="Price" />
         </columns>
       </TableView>

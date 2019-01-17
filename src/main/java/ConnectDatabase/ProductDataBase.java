@@ -114,4 +114,30 @@ public class ProductDataBase {
     }
 
 
+    public ArrayList<Product> getAllProductS() {
+        ArrayList<Product>products=new ArrayList<>();
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "select * from Product";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String id =resultSet.getString("ID");
+                    String name=resultSet.getString("Name");
+                    int a = resultSet.getInt("quantity");
+                    double p = resultSet.getDouble("Price");
+                    String url = resultSet.getString("urlImage");
+                    products.add(new Product(id,name,String.format("%,.2f",p),a,url));
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
 }

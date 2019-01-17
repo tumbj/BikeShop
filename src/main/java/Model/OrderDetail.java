@@ -5,6 +5,7 @@ public class OrderDetail {
     private int amount;
     private double price;
     private String productID;
+    private String prices;
 
     public String getOrderID() {
         return OrderID;
@@ -19,6 +20,10 @@ public class OrderDetail {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getPrices() {
+        return prices;
     }
 
     public void setOrderID(String orderID) {
@@ -42,6 +47,13 @@ public class OrderDetail {
         this.tel = tel;
         this.amount = amount;
         this.price = price;
+        this.OrderID=orderID;
+    }
+    public OrderDetail(String productID,String orderID, String price, int amount,String tel ) {
+        this.productID = productID;
+        this.tel = tel;
+        this.amount = amount;
+        this.prices = price;
         this.OrderID=orderID;
     }
 

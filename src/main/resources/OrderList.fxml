@@ -12,14 +12,15 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderListController">
     <children>
-        <TableView fx:id="tableView" layoutX="32.0" layoutY="134.0" prefHeight="541.0" prefWidth="424.0">
+        <TableView fx:id="tableView" layoutX="24.0" layoutY="134.0" prefHeight="541.0" prefWidth="443.0">
             <columns>
-                <TableColumn fx:id="CustomerID" prefWidth="127.0" text="CustomerID" />
-                <TableColumn fx:id="OrderID" minWidth="0.0" prefWidth="154.0" text="OrderID" />
-                <TableColumn fx:id="Status" minWidth="0.0" prefWidth="142.0" text="Status" />
+                <TableColumn fx:id="CustomerID" prefWidth="88.0" text="CustomerID" />
+            <TableColumn fx:id="CustomerName" prefWidth="112.0" text="CustomerName" />
+                <TableColumn fx:id="OrderID" minWidth="0.0" prefWidth="128.0" text="OrderID" />
+                <TableColumn fx:id="Status" minWidth="0.0" prefWidth="109.0" text="Status" />
             </columns>
         </TableView>
-        <Button fx:id="backBtn" layoutX="484.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="45.0" prefWidth="86.0" text="Back" />
+        <Button fx:id="backBtn" layoutX="508.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="45.0" prefWidth="86.0" text="Back" />
       <Button fx:id="goBtn" layoutX="508.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleGoBtn" prefHeight="45.0" prefWidth="86.0" text="ManageOder" />
       <Label fx:id="label" layoutX="805.0" layoutY="66.0" prefHeight="45.0" prefWidth="233.0">
          <font>
@@ -47,7 +48,7 @@
             <Image url="@picture/bike.png" />
          </image>
       </ImageView>
-      <Button fx:id="Menu" layoutX="570.0" layoutY="639.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="86.0" text="Menu" />
+      <Button fx:id="Menu" layoutX="594.0" layoutY="639.0" mnemonicParsing="false" onAction="#handleMenuBtn" prefHeight="43.0" prefWidth="86.0" text="Menu" />
       <Button fx:id="Receiptbtn" layoutX="594.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleReceiptBtn" prefHeight="45.0" prefWidth="86.0" text="Receipt" />
     </children>
 

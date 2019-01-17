@@ -24,7 +24,7 @@ public class OrderListController {
     @FXML
     private TableView<Order> tableView;
     @FXML
-    private TableColumn OrderID,CustomerID,Status;
+    private TableColumn OrderID,CustomerID,Status,CustomerName;
     private OrderDB orderDB=new OrderDB();
     private  Order o;
     @FXML
@@ -35,6 +35,7 @@ public class OrderListController {
     @FXML
     public void initialize() throws IOException {
         CustomerID.setCellValueFactory(new PropertyValueFactory<Order,String>("CustomerID"));
+        CustomerName.setCellValueFactory(new PropertyValueFactory<>("CustomerName"));
         OrderID.setCellValueFactory(new PropertyValueFactory<Order,String>("OrderID"));
         Status.setCellValueFactory(new PropertyValueFactory<Order,Boolean>("Status"));
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -43,7 +44,7 @@ public class OrderListController {
                 o = tableView.getSelectionModel().getSelectedItem();
             }
         });
-        tableView.setItems(addData(orderDB.getAllOrder()));
+        tableView.setItems(addData(orderDB.getOrderandCustomer()));
         if(checkFalse(orderDB.getAllOrder())){
             Alert alert = new Alert(Alert.AlertType.WARNING, "you have order",ButtonType.OK);
             alert.showAndWait();

@@ -4,6 +4,7 @@ public class Product {
     private String id;
     private String name;
     private double price;
+    private String prices;
     private int quantity;
     private String urlImage;
 
@@ -13,6 +14,21 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
         this.urlImage = urlImage;
+    }
+    public Product(String id,String name, String price, int quantity,String urlImage) {
+        this.id = id;
+        this.name = name;
+        this.prices =price;
+        this.quantity = quantity;
+        this.urlImage = urlImage;
+    }
+
+    public String getPrices() {
+        return prices;
+    }
+
+    public void setPrices(String prices) {
+        this.prices = prices;
     }
 
     public String getId() {

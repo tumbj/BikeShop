@@ -187,7 +187,63 @@ public class OrderDB {
         }
 
     }
+    public ArrayList<Order>  getOrderandCustomer(){
+        ArrayList<Order>orders=new ArrayList<>();
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query = "select OrderList.tel_number,OrderList.Order_ID,OrderList.status,Customer.first_name from OrderList\n" +
+                        "Inner join Customer on OrderList.tel_number = Customer.tel_number";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String Pid =resultSet.getString("first_name");
+                    String Oid=resultSet.getString("Order_ID");
+                    String a=resultSet.getString("status");
+                    String tel=resultSet.getString("Tel_number");
+                    orders.add(new Order(tel,Pid,Oid,Boolean.valueOf(a)));
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        return orders;
+    }
+    public  ArrayList<OrderDetail>getOrderListSting(String orderID){
+        ArrayList<OrderDetail>orders=new ArrayList<>();
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query = "select * from OrderDetail WHERE OrderDetail.Order_ID='"+orderID+"'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String Pid =resultSet.getString("Product_ID");
+                    String Oid=resultSet.getString("Order_ID");
+                    double p=resultSet.getDouble("Price");
+                    int a=resultSet.getInt("Amount");
+                    String tel=resultSet.getString("Tel_number");
+                    orders.add(new OrderDetail(Pid,Oid,String.format("%,.2f",p),a,tel));
+                }
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (OrderDetail order : orders) {
+            System.out.println(order);
+        }
+
+        return orders;
+    }
 
 
 

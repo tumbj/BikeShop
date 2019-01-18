@@ -66,6 +66,7 @@ public class CartController {
         quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         quantityCol.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
+        quantityCol.setStyle("-fx-alignment: center-right;");
         setAllData();
         tableView.setItems(carts);
         addressChoiceBox.getItems().add(customerToken.getAddress());
@@ -189,6 +190,13 @@ public class CartController {
             alert.showAndWait();
 //            System.out.println(carts.size());
             cart.removeAll();
+//            for (Product product:cartForShow.getProducts()) {
+//                for (Product product1:cart.getProducts()) {
+//                    if(product.getId().equals(product1.getId())){
+//                        product.setQuantity(product.getQuantity()-product1.getQuantity());
+//                    }
+//                }
+//            }
 //            carts.clear();
 //            System.out.println(carts.size());
             handleBackBtn(event);

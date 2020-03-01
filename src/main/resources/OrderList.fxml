@@ -12,12 +12,12 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OrderListController">
     <children>
-        <TableView fx:id="tableView" layoutX="24.0" layoutY="134.0" prefHeight="541.0" prefWidth="443.0">
+        <TableView fx:id="tableView" layoutX="24.0" layoutY="134.0" prefHeight="542.0" prefWidth="478.0">
             <columns>
-                <TableColumn fx:id="CustomerID" prefWidth="88.0" text="CustomerID" />
-            <TableColumn fx:id="CustomerName" prefWidth="112.0" text="CustomerName" />
-                <TableColumn fx:id="OrderID" minWidth="0.0" prefWidth="128.0" text="OrderID" />
-                <TableColumn fx:id="Status" minWidth="0.0" prefWidth="109.0" text="Status" />
+                <TableColumn fx:id="CustomerID" prefWidth="99.99999809265137" text="CustomerTel" />
+            <TableColumn fx:id="CustomerName" prefWidth="132.79999542236328" text="CustomerName" />
+                <TableColumn fx:id="OrderID" minWidth="0.0" prefWidth="138.39996337890625" text="OrderID" />
+                <TableColumn fx:id="Status" minWidth="0.0" prefWidth="106.39996948242185" text="Status" />
             </columns>
         </TableView>
         <Button fx:id="backBtn" layoutX="508.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBackBtn" prefHeight="45.0" prefWidth="86.0" text="Back" />

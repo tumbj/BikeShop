@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="715.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShowOrderDetailController">
    <children>
-      <Label fx:id="messageSt" alignment="TOP_LEFT" layoutX="572.0" layoutY="147.0" prefHeight="228.0" prefWidth="261.0">
+      <Label fx:id="messageSt" alignment="TOP_LEFT" layoutX="584.0" layoutY="147.0" prefHeight="228.0" prefWidth="261.0">
          <font>
             <Font size="15.0" />
          </font>
@@ -28,14 +28,14 @@
             <Image url="@picture/bike.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tableView" layoutX="29.0" layoutY="147.0" prefHeight="522.0" prefWidth="517.0">
+      <TableView fx:id="tableView" layoutX="29.0" layoutY="147.0" prefHeight="522.0" prefWidth="547.0">
         <columns>
           <TableColumn fx:id="name" minWidth="0.0" prefWidth="72.0" text="Tel" />
             <TableColumn fx:id="CustomerName" prefWidth="100.0" text="CustomerName" />
-          <TableColumn fx:id="ID" prefWidth="78.0" text="ProductID" />
-            <TableColumn fx:id="ProductName" prefWidth="90.0" text="ProductName" />
-            <TableColumn fx:id="quantity" minWidth="0.0" prefWidth="79.0" text="Quantity" />
-            <TableColumn fx:id="price" prefWidth="91.0" text="Price" />
+          <TableColumn fx:id="ID" prefWidth="101.60003662109375" text="ProductID" />
+            <TableColumn fx:id="ProductName" prefWidth="98.39996337890625" text="ProductName" />
+            <TableColumn fx:id="quantity" minWidth="0.0" prefWidth="77.60003662109375" text="Quantity" />
+            <TableColumn fx:id="price" prefWidth="99.20001220703125" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="checkstock" layoutX="581.0" layoutY="408.0" mnemonicParsing="false" onAction="#handlecheckstock" prefHeight="45.0" prefWidth="82.0" text="Checkstock" />

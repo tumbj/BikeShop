@@ -89,8 +89,15 @@ public class ShowProductController {
         quantityCol.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
         quantityCol.setStyle("-fx-alignment: center-right;");
         DateTime jodaTime = new DateTime();
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YYYY");
+//        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YYYY");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/YYYY hh:mm");
+
+//        dateLabel.setOnInputMethodTextChanged(event -> {
+//            dateLabel.setText(formatter.print(jodaTime));
+//        });
         dateLabel.setText(formatter.print(jodaTime));
+        System.out.println(formatter.print(jodaTime));
+
         if(customerToken!=null) {
             showUserLabel.setText("user:  "+customerToken.getUsername());
         }

@@ -91,7 +91,7 @@ public class ShowOrderDetailController {
                 String id=orderDetail.getProductID();
                 Product temp;
                 temp= productDataBase.getProduct(id);
-                str+=temp.getName()+" : "+temp.getQuantity()+" -> ";
+                str+=temp.getName()+" : "+temp.getQuantity()+" - "+orderDetail.getAmount()+" -> ";
                 str+=temp.getQuantity()-orderDetail.getAmount()+"\n";
             }
             messageSt.setText(str);
